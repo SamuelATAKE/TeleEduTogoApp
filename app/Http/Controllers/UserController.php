@@ -53,9 +53,7 @@ class UserController extends Controller
     }
 
     public function logout() {
-        Auth::guard('web')->logout();
-        Request()->session()->regenerate();
-        Request()->session()->regenerateToken();
+        $this->userService->logout();
         return redirect()->route('user.login');
     }
 

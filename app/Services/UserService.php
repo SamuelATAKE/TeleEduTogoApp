@@ -45,11 +45,17 @@ class UserService {
      * Try to log the user with the credentials.
      */
     function login($credentials) {
-        if(! Auth::attempt($credentials)) {
+        if(! Auth::guard('web')->attempt($credentials)) {
             return false;
         }
         Request()->session()->regenerate();
         return true;
+    }
+
+    public function logout() {
+        Auth::guard('web')->logout();
+        Request()->session()->regenerate();
+        Request()->session()->regenerateToken();
     }
 }
 
