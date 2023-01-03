@@ -32,22 +32,24 @@
                             <h4 class="mb-0 text-danger">Créer une classe</h4>
                         </div>
                         <hr />
-                        <div class="form-body">
+                        <form class="form-body" action="{{ route('niveaux.store') }}" method="POST">
+                            @csrf
+                            @method('post')
                             <div class="form-group">
-                                <label>Nom de la classe</label>
+                                <label>Nom du niveau</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend"> <span class="input-group-text bg-transparent"><i
                                                 class='bx bx-user'></i></span>
                                     </div>
                                     <input type="text" class="form-control border-left-0"
-                                        placeholder="Entrez le nom de la classe">
+                                        placeholder="Entrez le nom de la classe" name="nom" >
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Niveau</label>
+                                <label>Cycle</label>
                                 <div class="input-group">
                                     {{-- <input type="text" class="form-control border-left-0" placeholder=""> --}}
-                                    <select class="form-control form-control-lg" name="niveau">
+                                    <select class="form-control form-control-lg" name="cycle">
                                         <option value="Primaire">Primaire</option>
                                         <option value="Collège">Collège</option>
                                         <option value="Lycée">Lycée</option>
@@ -58,8 +60,8 @@
                                 </div>
                             </div>
 
-                            <button type="button" class="btn btn-danger px-5">Ajouter</button>
-                        </div>
+                            <button type="submit" class="btn btn-danger px-5">Ajouter</button>
+                        </form>
                     </div>
                 </div>
             </div>
