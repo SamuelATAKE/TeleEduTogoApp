@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ResourceServices\UserService;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,11 +24,10 @@ class UserController extends Controller
         ];
         $loginSuccess = $this->userService->login($credentials);
         if(! $loginSuccess) {
-            return back()->withInput()->withErrors([
-                'credentials' => 'Mot de passe et/ou email incorrect',
-            ]);
+            return redirect()->route('auth.user.login_page');
         }
-        return redirect()->route('admin.user-create-page');
+        // dd(Auth::guard('web')->user());
+        return redirect()->route('welcome');
     }
 
     public function login() {
@@ -41,7 +40,7 @@ class UserController extends Controller
             ]);
         }
 
-        return Redirect()->route('user.home');
+        return Redirect()->route('welcome');
     }
 
     public function show() {
@@ -54,7 +53,7 @@ class UserController extends Controller
 
     public function logout() {
         $this->userService->logout();
-        return redirect()->route('user.login');
+        return redirect()->route('welcome');
     }
 
 }

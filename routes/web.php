@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,15 +16,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-/* CONNEXION */
+/* AUTHENTIFICATION */
 
 // user
 Route::get('/inscription', function () {
     return view('auth.register');
-})->name('auth.register');
+})->name('auth.user.register');
+Route::post('/user/store', [UserController::class, 'store'])->name('auth.user.store');
 Route::get('/connexion', function () {
     return view('auth.login');
-})->name('auth.login');
+})->name('auth.user.login_page');
+Route::post('/user/login', [UserController::class, 'login'])->name('auth.user.login');
+Route::get('/deconnexion', [UserController::class, 'logout'])->name('auth.user.logout');
 // admin
 
 

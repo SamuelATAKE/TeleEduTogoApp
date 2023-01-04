@@ -44,7 +44,7 @@
                     <div class="sign_inner signup_inner">
                         <div class="text-center">
                             <h3>Retrouvez-votre mot de passe</h3>
-                            <p>Vous n'avez pas encore de compte? <a href="{{ route('auth.register') }}">Inscrivez-vous ici</a></p>
+                            <p>Vous n'avez pas encore de compte? <a href="{{ route('auth.user.register') }}">Inscrivez-vous ici</a></p>
                             <a href="#" class="btn-google"><img src="img/signup/gmail.png" alt=""><span class="btn-text">Connectez-vous avec Gmail</span></a>
                         </div>
                         <div class="divider">

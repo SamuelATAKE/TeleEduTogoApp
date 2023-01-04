@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\ResourceServices;
+namespace App\Services;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,10 +15,14 @@ class UserService {
      * Return the validated inputs in a array.
      * If the validation isn't successfull send a response with an error.
      */
+    // TODO : make a stronger validation on the password (needed?)
     function validateStoreRequest() {
         $validatedInputs = Request()->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
             'email' => 'email|unique:users|required',
-            'password' => 'required|min:6',
+            'password' => 'confirmed|required|min:6',
+            'confid-accept' => 'accepted',
         ]);
         return $validatedInputs;
     }
@@ -36,6 +40,8 @@ class UserService {
 
     function createUser($inputs) {
         $newUser = new User();
+        $newUser->firstname = $inputs['firstname'];
+        $newUser->lastname = $inputs['lastname'];
         $newUser->email = $inputs['email'];
         $newUser->password = Hash::make($inputs['password']);
         $newUser->save();

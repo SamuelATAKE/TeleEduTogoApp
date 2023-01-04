@@ -2,46 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Admin;
-use App\Services\AppServices;
-use Illuminate\Support\Facades\Hash;
+use App\Services\AdminService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
 
-    public $appService;
+    private $adminService;
 
-    public function __construct(AppServices $appServ)
-    {
-        $this->appService = $appServ;
+    public function __construct(AdminService $adminService) {
+        $this->adminService = $adminService;
     }
 
-    public function get_login() {
-        $this->appService->first_login();
-        return view('auth.admin-login');
-    }
-
-    public function login(Request $request) {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
-        if (! Auth::guard('admin')->attempt($credentials)) {
+    public function store() {
+        $inputs = $this->adminService->validateStoreRequest();
+        $this->adminService->createAdmin($inputs);
+        // $credentials = [
+        //     'email' => $inputs['email'],
+        //     'password' => $inputs['password']
+        // ];
+        $loginSuccess = $this->adminService->login($inputs);
+        if(! $loginSuccess) {
             return back()->withInput()->withErrors([
-                'credentials' => 'Veillez entrer un email et un mot de passe valides.',
+                'credentials' => 'Mot de passe et/ou email incorrect',
             ]);
         }
-        Request()->session()->regenerate();
-        return redirect()->route('admin.user-create-page');
+        return redirect()->route('admin.admin-create-page');
+    }
+
+    public function login() {
+        $credentials = $this->adminService->validateLoginRequest();
+        $loginSuccess = $this->adminService->login($credentials);
+
+        if(! $loginSuccess) {
+            return back()->withInput()->withErrors([
+                'credentials' => 'Mot de passe et/ou email incorrect',
+            ]);
+        }
+
+        return redirect()->route('admin.home');
+    }
+
+    public function show() {
+
+    }
+
+    public function update() {
+
     }
 
     public function logout() {
-        Auth::guard('admin')->logout();
-        Request()->session()->regenerate();
-        Request()->session()->regenerateToken();
+        $this->adminService->logout();
         return redirect()->route('admin.login');
     }
+
 }

@@ -60,7 +60,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav menu ml-auto">
                         <li class="nav-item dropdown submenu active">
-                            <a href="/" class="nav-link dropdown-toggle">Accueil</a>
+                            <a href="/" class="nav-link ">Accueil</a>
                             {{-- <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
                                 data-toggle="dropdown"></i>
                             <ul class="dropdown-menu">
@@ -269,10 +269,17 @@
                                 <li class="nav-item"><a href="blog-single.html" class="nav-link">Blog Details</a></li>
                             </ul> --}}
                         </li>
+                        @auth("web")
+                            <li class="nav-item">
+                                <a href="{{ route('auth.user.logout') }}" class="nav-link ">Déconnexion</a>
+                            </li>
+                        @endauth
                     </ul>
-                    <div class="right-nav">
-                        <a class="nav_btn" href="{{ route('auth.login') }}">Connexion</a>
-                    </div>
+                    @guest('web')
+                        <div class="right-nav">
+                            <a class="nav_btn" href="{{ route('auth.user.login_page') }}">Connexion</a>
+                        </div>
+                    @endguest
                 </div>
             </div>
         </nav>
