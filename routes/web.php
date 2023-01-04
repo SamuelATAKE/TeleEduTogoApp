@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\NiveauController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -94,10 +95,10 @@ Route::get('/etudiants', function () {
     return view('pages.admin.pages.utilisateurs.etudiants');
 })->name('utilisateurs.etudiants');
 
-Route::get('/classes', function () {
-    return view('pages.admin.pages.niveaux.classes');
-})->name('niveaux.classes');
+Route::get('/classes', [NiveauController::class, 'index'])->name('niveaux.classes');
 
 Route::get('/ajouter-une-classe', function () {
     return view('pages.admin.pages.niveaux.create');
 })->name('niveaux.create');
+
+Route::post('/ajout-de-la-classe', [NiveauController::class, 'store'])->name('niveaux.store');

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    
+
 <div class="page-content-wrapper">
     <div class="page-content">
         <!--breadcrumb-->
@@ -18,7 +18,8 @@
             </div>
             <div class="ml-auto">
                 <div class="btn-group">
-                    <a href="{{ route('niveaux.create') }}"><button type="button" class="btn btn-primary">Ajouter</button></a>
+                    <a href="{{ route('niveaux.create') }}"><button type="button"
+                            class="btn btn-primary">Ajouter</button></a>
                 </div>
             </div>
         </div>
@@ -28,36 +29,37 @@
                 <div class="card-title">
                     <h4 class="mb-0">Classes</h4>
                 </div>
-                <hr/>
+                <hr />
                 <div class="table-responsive">
                     <table class="table mb-0">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Cycle</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            @php
+                                $i=1;
+                            @endphp
+                            @forelse ($niveaux as $niveau)
+                                <tr>
+                                    <th scope="row">{{ $i }}</th>
+                                    <td>{{ $niveau->nom }}</td>
+                                    <td>{{ $niveau->cycle }}</td>
+                                    <td></td>
+                                </tr>
+                                @php
+                                    $i++;
+                                @endphp
+                            @empty
+                                <tr>
+                                    <th colspan="3">Aucun niveau enregistrer pour le moment</th>
+                                </tr>
+                            @endforelse
+
                         </tbody>
                     </table>
                 </div>
