@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\NiveauController;
+use App\Models\Level;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,27 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+/* AUTHENTIFICATION */
+
+// user
+Route::get('/inscription', function () {
+    // TODO : move to controller file
+    return view('auth.register')
+        ->with("cycles", Level::getAllCyclesInfos())
+        ->with("classes", Level::getGlobalClassesInfos())
+        ->with("series", Level::getAllSeriesInfos());
+})->name('auth.user.register');
+Route::post('/user/store', [UserController::class, 'store'])->name('auth.user.store');
+Route::get('/connexion', function () {
+    return view('auth.login');
+})->name('auth.user.login_page');
+Route::post('/user/login', [UserController::class, 'login'])->name('auth.user.login');
+Route::get('/deconnexion', [UserController::class, 'logout'])->name('auth.user.logout');
+// admin
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,13 +78,6 @@ Route::get('/connexion-admin', function () {
     return view('pages.admin.auth.login');
 })->name('admin.index');
 
-Route::get('/connexion', function () {
-    return view('auth.login');
-})->name('auth.login');
-
-Route::get('/inscription', function () {
-    return view('auth.register');
-})->name('auth.register');
 
 Route::get('/retrouver-mon-mot-de-passe', function () {
     return view('auth.forgot-password');
@@ -70,7 +87,7 @@ Route::get('/profil', function () {
     return view('pages.profil.index');
 })->name('profil.index');
 
-// Les utilisateurs 
+// Les utilisateurs
 Route::get('/administrateurs', function () {
     return view('pages.admin.pages.utilisateurs.administrateurs');
 })->name('utilisateurs.administrateurs');

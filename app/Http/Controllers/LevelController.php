@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Niveau;
 use Illuminate\Http\Request;
 
-class NiveauController extends Controller
+class LevelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,6 @@ class NiveauController extends Controller
     public function index()
     {
         //
-        $niveaux = Niveau::All();
-        return view('pages.admin.pages.niveaux.classes', compact('niveaux'));
     }
 
     /**
@@ -38,26 +35,15 @@ class NiveauController extends Controller
     public function store(Request $request)
     {
         //
-        request()->validate([
-            'nom' => 'required',
-            'cycle' => 'required'
-        ]);
-
-        $niveau = new Niveau;
-        $niveau->nom = request('nom');
-        $niveau->cycle = request('cycle');
-        $niveau->save();
-
-        return redirect(route('niveaux.classes'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Niveau  $niveau
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Niveau $niveau)
+    public function show($id)
     {
         //
     }
@@ -65,10 +51,10 @@ class NiveauController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Niveau  $niveau
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Niveau $niveau)
+    public function edit($id)
     {
         //
     }
@@ -77,31 +63,21 @@ class NiveauController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Niveau  $niveau
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Niveau $niveau)
+    public function update(Request $request, $id)
     {
         //
-        request()->validate([
-            'nom' => 'required',
-            'cycle' => 'required'
-        ]);
-        
-        $niveau->nom = request('nom');
-        $niveau->cycle = request('cycle');
-        $niveau->save();
-
-        return redirect(route('niveaux.classes'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Niveau  $niveau
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Niveau $niveau)
+    public function destroy($id)
     {
         //
     }

@@ -44,26 +44,28 @@
                     <div class="sign_inner signup_inner">
                         <div class="text-center">
                             <h3>Se connecter à TeleEduTogoApp</h3>
-                            <p>Vous n'avez pas encore de compte? <a href="{{ route('auth.register') }}">Inscrivez-vous ici</a></p>
+                            <p>Vous n'avez pas encore de compte? <a href="{{ route('auth.user.register') }}">Inscrivez-vous ici</a></p>
                             <a href="#" class="btn-google"><img src="img/signup/gmail.png" alt=""><span class="btn-text">Connectez-vous avec Gmail</span></a>
                         </div>
                         <div class="divider">
                             <span class="or-text">ou</span>
                         </div>
-                        <form action="#" class="row login_form">
+                        <form action="{{ route('auth.user.login') }}" method="POST" class="row login_form">
+                            {{ csrf_field() }}
                             <div class="col-lg-12 form-group">
                                 <div class="small_text">Votre adresse mail</div>
-                                <input type="email" class="form-control" id="email" placeholder="Entrez votre adresse mail">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Entrez votre adresse mail" value="{{old('email')}}">
                             </div>
                             <div class="col-lg-12 form-group">
                                 <div class="small_text">Mot de passe</div>
                                 <div class="confirm_password">
-                                    <input id="confirm-password" name="confirm-password" type="password" class="form-control" placeholder="Entrez votre mot de passe" autocomplete="off">
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="Entrez votre mot de passe" autocomplete="off">
                                     <a href="{{ route('auth.recovery') }}" class="forget_btn">Mot de passe oublié?</a>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 text-center">
+                                <p class="error">@error('credentials') {{$message}} @enderror</p>
                                 <button type="submit" class="btn action_btn thm_btn">Connexion</button>
                             </div>
                         </form>
