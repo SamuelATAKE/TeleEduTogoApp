@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('content');
-            $table->foreign('author')->references('id')->on('users');
-            $table->foreign('forum')->references('id');
+            $table->foreignId('author')->constrained('users');
+            $table->foreignId('forum')->constrained('forums');
             $table->integer('likes')->default(0);
             $table->integer('dislikes')->default(0);
         });

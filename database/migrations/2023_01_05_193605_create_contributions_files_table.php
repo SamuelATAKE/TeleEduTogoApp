@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('contributions_files', function (Blueprint $table) {
             $table->id();
-            $table->foreign('contribution')->references('id')->on('contributions');
+            $table->foreignId('contribution')->constrained('contributions');
             $table->string('file_path');
             $table->string('file_name');
             $table->timestamps();

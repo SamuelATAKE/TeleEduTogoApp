@@ -17,10 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->foreign('author')->references('id')->on('users');
-            $table->foreign('category')->references('id')->on('categories');
+            //use  foreignkeu constrained()
+            $table->foreignId('author')->constrained('users');
+            $table->foreignId('category')->constrained('categories');
             $table->integer('likes')->default(0);
             $table->integer('dislikes')->default(0);
+            $table->foreignId('level')->constrained('levels');
             $table->timestamps();
         });
     }

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->foreign('author')->references('id')->on('users');
-            $table->foreign('category')->references('id')->on('categories');
+            $table->foreignId('author')->constrained('users');
+            $table->foreignId('category')->constrained('categories');
             $table->timestamps();
             $table->boolean('is_validated')->default(false);
             $table->integer('likes')->default(0);

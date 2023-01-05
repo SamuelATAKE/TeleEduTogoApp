@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('forum_images', function (Blueprint $table) {
             $table->id();
-            $table->foreign('forum')->references('id')->on('forums');
+            $table->foreignId('forum')->constrained('forums');
             $table->string('image');
             $table->timestamps();
         });
