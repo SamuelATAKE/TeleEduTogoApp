@@ -53,6 +53,7 @@
                         <form action="{{ route('auth.user.store') }}" method="POST" class="row login_form">
                             {{ csrf_field() }}
                             @method('post')
+                            {{-- Nom + Prenom --}}
                             <div class="col-sm-6 form-group">
                                 <label for="firstname" class="small_text">Prénom(s)</label>
                                 <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Entrez votre prénom" value="{{old('firstname')}}">
@@ -63,6 +64,37 @@
                                 <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Entrez votre nom" value="{{old('lastname')}}">
                                 <p class="error">@error('lastname') {{$message}} @enderror</p>
                             </div>
+                            {{-- Niveau scolaire --}}
+                            <div class="col-sm-4 form-group">
+                                <label for="cycle" class="small_text">Cycle Scolaire</label>
+                                <select class="form-control" name="cycle" id="cycle">
+                                    @foreach ($cycles as $cycleCodeName => $infos)
+                                    <option value="{{$cycleCodeName}}">{{$infos["fullName"]}}</option>
+                                    @endforeach
+                                </select>
+                                <p class="error">@error('cycle') {{$message}} @enderror</p>
+                                <p class="error">@error('level') {{$message}} @enderror</p>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label for="classe" class="small_text">Classe</label>
+                                <select class="form-control" name="classe" id="classe">
+                                    @foreach ($classes as $classeCodeName => $infos)
+                                        <option value="{{$classeCodeName}}">{{$infos["fullName"]}}</option>
+                                    @endforeach
+                                </select>
+                                <p class="error">@error('level') {{$message}} @enderror</p>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label for="serie" class="small_text">Série</label>
+                                <select class="form-control" name="serie" id="serie">
+                                    <option value=""></option>
+                                    @foreach ($series as $serieCodeName => $infos)
+                                        <option value="{{$serieCodeName}}">{{$infos["fullName"]}}</option>
+                                    @endforeach
+                                </select>
+                                <p class="error">@error('level') {{$message}} @enderror</p>
+                            </div>
+                            {{-- Credentials --}}
                             <div class="col-lg-12 form-group">
                                 <label for="email" class="small_text">Votre adresse mail</label>
                                 <input type="email" class="form-control" name="email" id="email" placeholder="Entrez votre adresse mail" value="{{old('email')}}">

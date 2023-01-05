@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Level;
 use App\Models\User;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,9 @@ class UserService {
     // TODO : make a stronger validation on the password (needed?)
     function validateStoreRequest() {
         $validatedInputs = Request()->validate([
+            'cycle' => 'required',
+            'classe' => '',
+            'serie' => '',
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'email|unique:users|required',
@@ -44,7 +48,16 @@ class UserService {
         $newUser->lastname = $inputs['lastname'];
         $newUser->email = $inputs['email'];
         $newUser->password = Hash::make($inputs['password']);
-        $newUser->save();
+        // !$newUser->save();
+        return $newUser;
+    }
+
+    // TODO : Need extension to Universitary levels
+    // TODO : move to levelService (needed?)
+    function affectLevelToUser(User $user, $cycle, $classe, $serie) {
+        $level = Level::getPreUnivLevel($cycle, $classe, $serie);
+        $user->level()->associate($level);
+        $user->save();
     }
 
     /**

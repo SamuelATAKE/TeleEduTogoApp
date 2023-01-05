@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Level;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +18,13 @@ class UserController extends Controller
 
     public function store() {
         $inputs = $this->userService->validateStoreRequest();
-        $this->userService->createUser($inputs);
+        if(! Level::isLevelInLevelTree($inputs["cycle"], $inputs["classe"], $inputs["serie"])) {
+            return back()->withInput()->withErrors([
+                'level' => 'Entrez des un niveau valide',
+            ]);
+        }
+        $newUser = $this->userService->createUser($inputs);
+        $this->userService->affectLevelToUser($newUser, $inputs["cycle"], $inputs["classe"], $inputs["serie"]);
         $credentials = [
             'email' => $inputs['email'],
             'password' => $inputs['password']

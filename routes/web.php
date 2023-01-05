@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\NiveauController;
+use App\Models\Level;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,11 @@ use Illuminate\Support\Facades\Route;
 
 // user
 Route::get('/inscription', function () {
-    return view('auth.register');
+    // TODO : move to controller file
+    return view('auth.register')
+        ->with("cycles", Level::getAllCyclesInfos())
+        ->with("classes", Level::getGlobalClassesInfos())
+        ->with("series", Level::getAllSeriesInfos());
 })->name('auth.user.register');
 Route::post('/user/store', [UserController::class, 'store'])->name('auth.user.store');
 Route::get('/connexion', function () {
