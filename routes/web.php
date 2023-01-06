@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContributionsController;
 use App\Http\Controllers\ContributionsFilesController;
 use App\Http\Controllers\UserController;
@@ -146,3 +147,15 @@ Route::get('/admin/validate/{contributions}', [ContributionsController::class, '
 
 Route::get('/admin/delete/{contributions}', [ContributionsController::class, 'destroy'])
     ->name('admin.contribution.{contributions}.destroy');
+
+Route::get('/admin/category/new', [CategoryController::class, 'create'])
+    ->name('admin.category.create');
+
+Route::post('/admin/category/post', [CategoryController::class, 'store'])
+    ->name('admin.category.store');
+
+Route::get('/admin/category/{category}/destroy', [CategoryController::class, 'destroy'])
+    ->name('admin.category.{category}.destroy');
+
+Route::get('/admin/category/{category}/show', [CategoryController::class, 'show'])
+    ->name('admin.category.{category}.show');

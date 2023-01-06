@@ -20,4 +20,13 @@ class Category extends Model
     {
         return $this->hasMany(Contributions::class, 'category');
     }
+
+    public function routingKey() {
+        return $this->id;
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
 }

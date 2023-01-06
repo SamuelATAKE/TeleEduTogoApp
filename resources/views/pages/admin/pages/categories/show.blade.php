@@ -26,14 +26,13 @@
             <div class="card radius-15">
                 <div class="card-body">
                     <div class="card-title">
-                        <h4 class="mb-0">Classes</h4>
+                        <h4 class="mb-0">Categorie : {{$category->name}} </h4>
                     </div>
                     <hr />
                     <div class="table-responsive">
                         <table class="table mb-0">
                             <thead>
                                 <tr>
-                                    <th scope="col">status</th>
                                     <th scope="col">Titre</th>
                                     <th scope="col">Catégorie</th>
                                     <th scope="col">Auteur</th>
@@ -43,10 +42,6 @@
                             <tbody>
                                 @forelse ($contributions as $contribution)
                                     <tr>
-                                        <td><i
-                                                class="btn btn-sm @if ($contribution->is_validated) btn-light-success @else btn-light-warning @endif
-                                             btn-block radius-30"></i>
-                                        </td>
                                         <td>{{ $contribution->title }}</td>
                                         <td>{{ $contribution->Category->name }}</td>
                                         <td>{{ $contribution->Author->firstname }}</td>

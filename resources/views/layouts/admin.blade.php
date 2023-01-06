@@ -133,6 +133,14 @@
                         <div class="menu-title">Non validées</div>
                     </a>
                 </li>
+                <li class="menu-label">Categories</li>
+                <li>
+                    <a href="{{ route('admin.category.create') }}">
+                        <div class="parent-icon icon-color-1"> <i class="bx bx-list"></i>
+                        </div>
+                        <div class="menu-title">Liste</div>
+                    </a>
+                </li>
             </ul>
             <!--end navigation-->
         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use PhpParser\Node\Stmt\Catch_;
 
 class CategoryController extends Controller
 {
@@ -25,7 +26,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('pages.admin.pages.categories.create', [
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -36,7 +40,11 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        Category::create([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+        return redirect()->route('admin.category.create');
     }
 
     /**
@@ -47,7 +55,11 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $contributions = $category->Contributions;
+        return view('pages.admin.pages.categories.show', [
+            'contributions' => $contributions,
+            'category' => $category,
+        ]);
     }
 
     /**
@@ -81,6 +93,13 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+
+        foreach($category->contributions as $contribution) {
+            $contribution->update([
+                'category' => 21,
+            ]);
+        }
+        $category->delete();
+        return redirect()->route('admin.category.create');
     }
 }
