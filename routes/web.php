@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ContributionsController;
+use App\Http\Controllers\ContributionsFilesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\NiveauController;
@@ -107,3 +109,40 @@ Route::get('/ajouter-une-classe', function () {
 })->name('niveaux.create');
 
 Route::post('/ajout-de-la-classe', [NiveauController::class, 'store'])->name('niveaux.store');
+
+Route::get('/contributions/new', [ContributionsController::class, 'create'])
+    ->name('contributions.create');
+Route::post('/contributions/post', [ContributionsController::class, 'store'])
+    ->name('contributions.post');
+
+Route::get('/contributions', [ContributionsController::class, 'index'])
+    ->name('contributions');
+
+Route::get('/{contributions}/show', [ContributionsController::class, 'show'])
+    ->name('contribution.{contributions}.show');
+
+// TODO : possibility of all download at once
+// Route::get('/download/{contributionsFiles}', [ContributionsFilesController::class, 'show'])
+//     ->name('download.{contributionsFiles}.show');
+
+Route::get('/download/{contributionsFiles}', [ContributionsFilesController::class, 'show'])
+    ->name('download.{contributionsFiles}.show');
+
+/* Admin routes */
+
+// TODO : using admin/ break the style, i don't know why
+
+Route::get('/admin/contributions', [ContributionsController::class, 'admin_index'])
+    ->name('admin.contributions.list');
+
+Route::get('/admin/contributions/non_validated', [ContributionsController::class, 'non_validated'])
+    ->name('admin.contribution.non_validated');
+
+Route::get('/admin/{contributions}/show', [ContributionsController::class, 'admin_show'])
+    ->name('admin.contribution.{contributions}.show');
+
+Route::get('/admin/validate/{contributions}', [ContributionsController::class, 'validation'])
+    ->name('admin.contribution.{contributions}.validate');
+
+Route::get('/admin/delete/{contributions}', [ContributionsController::class, 'destroy'])
+    ->name('admin.contribution.{contributions}.destroy');

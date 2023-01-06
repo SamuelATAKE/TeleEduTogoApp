@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
+    // TODO : must be implement. This case is just for the contribution test
+    protected $fillable = [
+        'name',
+        'description',
+    ];
+
+
+    public function contributions()
+    {
+        return $this->hasMany(Contributions::class, 'category');
+    }
 }

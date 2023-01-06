@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreContributionsFilesRequest;
 use App\Http\Requests\StoreContributionsRequest;
 use App\Http\Requests\UpdateContributionsRequest;
+use App\Models\Category;
 use App\Models\Contributions;
+use App\Services\ContributionsService;
 
 class ContributionsController extends Controller
 {
+    private $contributionsService;
+
+    public function __construct(ContributionsService $contributionsService)
+    {
+        $this->contributionsService = $contributionsService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,17 @@ class ContributionsController extends Controller
      */
     public function index()
     {
-        //
+        $contributions = Contributions::where('is_validated', true)->orderBy('created_at', 'desc')->get();
+        return view('pages.contributions.index', [
+            'contributions' => $contributions,
+        ]);
+    }
+    public function admin_index()
+    {
+        $contributions = Contributions::all()->reverse();
+        return view('pages.admin.pages.contributions.liste', [
+            'contributions' => $contributions,
+        ]);
     }
 
     /**
@@ -25,7 +45,10 @@ class ContributionsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view("pages.contributions.create", [
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -36,7 +59,18 @@ class ContributionsController extends Controller
      */
     public function store(StoreContributionsRequest $request)
     {
-        //
+
+        $contribution = $this->contributionsService->create_contribution($request->all());
+
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                ContributionsFilesController::store($file, $contribution);
+            }
+        }
+
+        return redirect()->route('contributions.create')->with([
+            'success' => 'Votre contribution a été enregistrée.',
+        ]);
     }
 
     /**
@@ -47,7 +81,17 @@ class ContributionsController extends Controller
      */
     public function show(Contributions $contributions)
     {
-        //
+        $relateds = $contributions->Category->contributions->take(5);
+        return view('pages.contributions.show', [
+            'contributions' => $contributions,
+            'relateds' => $relateds,
+        ]);
+    }
+    public function admin_show(Contributions $contributions)
+    {
+        return view('pages.admin.pages.contributions.show', [
+            'contributions' => $contributions,
+        ]);
     }
 
     /**
@@ -81,6 +125,24 @@ class ContributionsController extends Controller
      */
     public function destroy(Contributions $contributions)
     {
-        //
+        foreach ($contributions->contributionsFiles as $contributionsFiles) {
+            ContributionsFilesController::destroy($contributionsFiles);
+        }
+        $contributions->delete();
+        return redirect()->route('admin.contributions.list');
+    }
+
+    public function non_validated()
+    {
+        $contributions = Contributions::where('is_validated', false)->get();
+        return view('pages.admin.pages.contributions.liste', [
+            'contributions' => $contributions,
+        ]);
+    }
+
+    public function validation(Contributions $contributions)
+    {
+        $this->contributionsService->contribution_validation($contributions);
+        return redirect()->route('admin.contributions.list');
     }
 }
