@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/mcustomscrollbar/jquery.mCustomScrollbar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style-main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    @livewireStyles
     <title>TeleEduTogoApp</title>
 </head>
 
@@ -402,6 +403,7 @@
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    @livewireScripts
 </body>
 
 </html>

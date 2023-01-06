@@ -68,8 +68,7 @@
                             </div>
                         </div>
                         <div class="action-button-container action-btns">
-                            <a href="#" class="action_btn btn-ans ask-btn reply-btn">Like</a>
-                            <a href="#" class="action_btn btn-ans ask-btn too-btn">Dislike</a>
+                            @livewire('like', ['contribution' => $contributions])
                         </div>
                     </div>
                 </div>

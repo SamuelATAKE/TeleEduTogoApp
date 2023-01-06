@@ -25,4 +25,18 @@ class ContributionsService {
             'is_validated' => true,
         ]);
     }
+
+    public static function contribution_like(Contributions $contribution) {
+        $likes = $contribution->like;
+        $contribution->update([
+            'like' => $likes + 1,
+        ]);
+    }
+
+    public static function contribution_dislike(Contributions $contribution) {
+        $dislikes = $contribution->dislike;
+        $contribution->update([
+            'dislike' => $dislikes + 1,
+        ]);
+    }
 }

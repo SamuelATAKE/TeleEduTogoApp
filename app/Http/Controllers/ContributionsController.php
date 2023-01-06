@@ -145,4 +145,12 @@ class ContributionsController extends Controller
         $this->contributionsService->contribution_validation($contributions);
         return redirect()->route('admin.contributions.list');
     }
+
+    public function like(Contributions $contribution) {
+        $this->contributionsService->contribution_like($contribution);
+    }
+
+    public function dislike(Contributions $contribution) {
+        $this->contributionsService->contribution_dislike($contribution);
+    }
 }
