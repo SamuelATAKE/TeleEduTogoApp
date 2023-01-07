@@ -201,7 +201,7 @@
                                     <img src="img/home_support/rc1.png" alt="community post">
                                 </div>
                                 <div class="entry-content">
-                                    <a href="{{ route('forums.catDetails', $category->slug) }}">
+                                    <a href="forum-topics.html">
                                         <h3 class="post-title"> {{ $category->name }} </h3>
                                     </a>
                                     <p>{{ $category->description }}</p>

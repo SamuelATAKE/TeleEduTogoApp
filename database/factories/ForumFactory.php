@@ -17,7 +17,13 @@ class ForumFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->name,
+            'content' => $this->faker->text,
+            'author' => $this->faker->numberBetween(1, 10),
+            'category' => $this->faker->numberBetween(1, 10),
+            'likes' => $this->faker->numberBetween(1, 10),
+            'dislikes' => $this->faker->numberBetween(1, 10),
+            'slug' => $this->faker->uuid,
         ];
     }
 }
