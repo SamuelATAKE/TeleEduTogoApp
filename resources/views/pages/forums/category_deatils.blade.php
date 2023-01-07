@@ -3,10 +3,10 @@
 @section('content')
     <!--================Forum Breadcrumb Area =================-->
     <section class="doc_banner_area search-banner-light"
-        style="background: linear-gradient(62deg, rgb(21, 213, 235) 0.00%, rgb(255, 0, 191) 100.00%);">
+        style="background: linear-gradient(62deg, rgb(14, 6, 6) 0.00%, rgb(255, 0, 191) 100.00%);">
         <div class="container">
             <div class="doc_banner_text">
-                <span class="mb-3 mt-2 pt-1 wow fadeInUp d-block" data-wow-delay="1.1s">
+                <span class="mb-3 mt-2 pt-1 wow fadeInUp d-block" data-wow-delay="0.7s">
                     <!--forum icon-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24">
                         <path fill="white"
@@ -14,12 +14,12 @@
                     </svg>
                 </span>
                 <span>
-                    <h5 class="wow fadeInUp text-white d-inline" data-wow-delay="1.5s">Forum | Tous les forums</h5>
+                    <h5 class="wow fadeInUp text-white d-inline" data-wow-delay="0.9s">Forum | {{ $category->name }}</h5>
                 </span>
             </div>
             <div class="doc_banner_content">
                 <form action="#" class="header_search_form">
-                    <div class="header_search_form_info wow fadeInUp" data-wow-delay="1.7s">
+                    <div class="header_search_form_info wow fadeInUp" data-wow-delay="1.2s">
                         <div class="form-group">
                             <div class="input-wrapper">
                                 <i class="icon_search"></i>
@@ -61,7 +61,7 @@
                                     class="text-white">Mathématiques</a>,</li>
                             <li class="wow fadeInUp text-white" data-wow-delay="0.3s"><a href="#"
                                     class="text-white">Sciences physiques</a>,</li>
-                            <li class="wow fadeInUp text-white" data-wow-delay="0.4s"><a href="#"
+                            <li class="wow fadeInUp text-white" data-wow-delay="0.3s"><a href="#"
                                     class="text-white">SVT</a></li>
                         </ul>
                     </div>
@@ -75,9 +75,9 @@
                 <div class="col-sm-7">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-                            <li class="breadcrumb-item"><a href="#">Forum</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Tous les forums</li>
+                            <li class="breadcrumb-item"><a href="/">Accueil</a></li>"
+                            <li class="breadcrumb-item"><a href="{{ route('forums') }}">Tous les forums</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $category->name }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -98,7 +98,7 @@
                     <div class="answer-action shadow">
                         <div class="action-content">
                             <div class="image-wrap">
-                                <img src="img/home_support/answer.png" alt="answer action">
+                                <img src="{{ asset('img/home_support/answer.png') }}" alt="answer">
                             </div>
                             <div class="content">
                                 <h2 class="ans-title">Vous n'avez pas de réponse?</h2>
@@ -144,7 +144,7 @@
                                     <div class="form-group forum-form-group">
                                         <label for="exampleFormControlSelect1">Catégorie</label>
                                         <select class="form-control" id="exampleFormControlSelect1" name="category">
-                                            @foreach ($forums as $category)
+                                            @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
@@ -180,44 +180,50 @@
             @if (count($forums) > 0)
                 <div class="post-header forums-header">
                     <div class="col-md-6 col-sm-6 support-info">
-                        <span> Catégories</span>
+                        <span> <i class="fa fa-comments-o"></i> {{ count($forums) }} Sujets</span>
                     </div>
                     <!-- /.support-info -->
                     <div class="col-md-6 col-sm-6 support-category-menus">
                         <ul class="forum-titles">
-                            <li class="forum-topic-count">Questions</li>
-                            <li class="forum-reply-count">Réponses</li>
-                            <li class="forum-freshness">Dernier post</li>
+                            <li class="forum-topic-count">Commentaires</li>
+                            <li class="forum-reply-count">J'aime</li>
+                            <li class="forum-reply-count">J'aime pas</li>
+                            <li class="forum-freshness">Dernier commentaire</li>
                         </ul>
                     </div>
                     <!-- /.support-category-menus -->
                 </div>
                 <!-- /.post-header -->
-                @foreach ($forums as $category)
+                @foreach ($forums as $forum)
                     <div class="community-posts-wrapper bb-radius">
                         <div class="community-post style-two forum-item bug">
                             <div class="col-md-6 post-content">
                                 <div class="author-avatar forum-icon">
-                                    <img src="img/home_support/rc1.png" alt="community post">
+                                    <img src="{{asset('img/home_support/rc7.png')}}" alt="community post">
                                 </div>
                                 <div class="entry-content">
-                                    <a href="forum-topics.html">
-                                        <h3 class="post-title"> {{ $category->name }} </h3>
+                                    <a href="{{ route('forum', $forum->slug) }}">
+                                        <h3 class="post-title"> {{ $forum->title }} </h3>
                                     </a>
-                                    <p>{{ $category->description }}</p>
+                                    <p>{{ $forum->content }}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 post-meta-wrapper">
                                 <ul class="forum-titles">
-                                    <li class="forum-topic-count">{{ $category->forums_count }}</li>
+                                    <li class="forum-topic-count">{{ count($forum->comments) }}</li>
                                     <li class="forum-reply-count">
-                                        {{ $category->comments_count }}</li>
+                                        <i class="fa fa-thumbs-up"></i> {{ $forum->likes }}
+                                    </li>
+                                    <li class="forum-reply-count">
+                                        <i class="fa fa-thumbs-up"></i> {{ $forum->likes }}
+                                    </li>
                                     <li class="forum-freshness">
                                         <div class="freshness-box">
                                             <div class="freshness-top">
                                                 <div class="freshness-link">
                                                     <a href="#" title="Reply To: Main Forum Rules &amp; Policies">
-                                                        {{ $category->last_forum_created_at ? \Carbon\Carbon::parse($category->last_forum_created_at)->diffForHumans() : 'Aucun post' }}
+                                                        {{ $forum->comments->last() ? $forum->comments->last()->created_at->diffForHumans() : 'Pas de commentaire' }}
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="freshness-btm">
@@ -226,11 +232,12 @@
                                                     <div class="freshness-name">
                                                         <a href="#" title="View Eh Jewel's profile"
                                                             class="bbp-author-link">
-                                                            <span class="bbp-author-name">{{ $category->last_forum_author ? $category->last_forum_author : 'Aucun post' }}</span>
+                                                            <span
+                                                                class="bbp-author-name">{{ $forum->comments->last() ? $forum->comments->last()->user->name : '' }}</span>
                                                         </a>
                                                     </div>
                                                     <span class="bbp-author-avatar">
-                                                        <img alt="Eh Jewel" src="img/home_support/cp5.jpg"
+                                                        <img alt="Eh Jewel" src="{{asset('img/home_support/cp5.jpg')}}"
                                                             class="avatar photo">
                                                     </span>
                                                 </a>
@@ -245,6 +252,15 @@
                 <!-- Pagination  laravel bootstrap -->
                 <div class="justify-content-center mt-3">
                     {{ $forums->links() }}
+                </div>
+            @else
+                <div class="alert alert-info">
+                    <div class="alert-icon">
+                        <i class="fa fa-info fa-2x"></i>
+                        </div>
+                        <div class="alert-message">
+                            <span><strong>Info!</strong> Il n'y a pas encore de forum dans cette catégorie</span>
+                        </div>
                 </div>
             @endif
 

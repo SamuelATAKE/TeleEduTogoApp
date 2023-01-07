@@ -28,16 +28,26 @@ class ForumController extends Controller
     public function index()
     {
         $forums = $this->forumService->getCategoriesWithForums();
-        $levels = Level::getPreUnivLevelsInfos();
-        return view('pages.forums.general', compact('forums', 'levels'));
+        return view('pages.forums.general', compact('forums'));
     }
 
     public function indexCatDetails($slug)
     {
-        $id = ForumCategory::where('slug', $slug)->first()->id;
-        $forums = $this->forumService->getForumsByCategory($id);
-        $levels = Level::getPreUnivLevelsInfos();
-        return view('pages.forums.category_deatils', compact('forums', 'levels'));
+        $category = ForumCategory::firstWhere('slug', $slug);
+        $categories = ForumCategory::all();
+        $forums = $this->forumService->getForumsByCategory($category->id);
+        return view('pages.forums.category_deatils', compact('forums', 'category', 'categories'));
+    }
+
+    /**
+     * Details of forum
+     *
+     *
+     */
+    public function showForumDetails($slug)
+    {
+        $forum = Forum::firstWhere('slug', $slug);
+        return view('pages.forums.details', compact('forum'));
     }
 
     /**

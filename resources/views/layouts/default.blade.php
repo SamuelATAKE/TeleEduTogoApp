@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/mcustomscrollbar/jquery.mCustomScrollbar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style-main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-    @livewireStyles
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
     <title>TeleEduTogoApp</title>
 </head>
 
@@ -27,7 +27,7 @@
             <div class="round_spinner">
                 <div class="spinner"></div>
                 <div class="text">
-                    <img src="img/spinner_logo.png" alt="">
+                    <img src={{ asset('img/spinner_logo.png') }} alt="logo">
                     <h4><span>TeleEduTogo</span>App</h4>
                 </div>
             </div>
@@ -39,10 +39,10 @@
         <nav class="navbar navbar-expand-lg menu_one menu_purple sticky-nav">
             <div class="container">
                 <a class="navbar-brand header_logo" href="/">
-                    <img class="first_logo sticky_logo" style="width: 25%; height:25%" src="img/logo.png"
-                        srcset="img/logo.png 2x" alt="logo">
-                    <img class="white_logo main_logo" style="width: 25%; height:25%" src="img/logo.png"
-                        srcset="img/logo.png 2x" alt="logo">
+                    <img class="first_logo sticky_logo" style="width: 25%; height:25%" src="{{ asset('img/logo.png') }}"
+                        srcset="{{ asset('img/logo.png') }} 2x" alt="logo">
+                    <img class="white_logo main_logo" style="width: 25%; height:25%" src="{{ asset('img/logo.png') }}"
+                        srcset="{{ asset('img/logo.png') }} 2x" alt="logo">
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -62,7 +62,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav menu ml-auto">
-                        <li class="nav-item dropdown submenu active">
+                        <li class="nav-item dropdown submenu {{ Request::is('/') ? ' active' : '' }} ">
                             <a href="/" class="nav-link ">Accueil</a>
                             {{-- <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
                                 data-toggle="dropdown"></i>
@@ -244,7 +244,7 @@
                                 <li class="nav-item"><a href="404-error.html" class="nav-link">BAC II</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown submenu">
+                        <li class="nav-item dropdown submenu {{ Request::is('forums*') ? 'active' : '' }}">
                             <a class="nav-link dropdown-toggle" href="{{ route('forums') }}" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Forum
@@ -320,7 +320,7 @@
                         <div class="col-lg-4 col-sm-6">
                             <div class="f_widget doc_about_widget wow fadeInUp" data-wow-delay="0.2s">
                                 <a href="#">
-                                    <img style="width: 50%; height: 50%" src="img/logo.png" srcset="img/logo.png 2x"
+                                    <img style="width: 50%; height: 50%" src="{{ asset('img/logo.png') }}"
                                         alt="">
                                 </a>
                                 <p>TeleEduTogoApp, une puissante application pour l'éducation au Togo</p>
@@ -336,10 +336,10 @@
                             <div class="f_widget doc_service_list_widget pl-30 wow fadeInUp" data-wow-delay="0.3s">
                                 <h3 class="f_title_two">Solutions</h3>
                                 <ul class="list-unstyled">
-                                    <li><a href="#"><img src="img/new/smile2.png" alt="">Forum</a></li>
-                                    <li><a href="#"><img src="img/new/doc2.png" alt="">Examens</a></li>
-                                    <li><a href="#"><img src="img/new/house2.png" alt="">Cours</a></li>
-                                    <li><a href="#"><img src="img/new/bag2.png" alt="">Documents</a>
+                                    <li><a href="#"><img src="{{ asset('img/new/smile2.png') }}" alt="">Forum</a></li>
+                                    <li><a href="#"><img src="{{ asset('img/new/doc2.png') }}" alt="">Examens</a></li>
+                                    <li><a href="#"><img src="{{ asset('img/new/house2.png') }}" alt="">Cours</a></li>
+                                    <li><a href="#"><img src="{{ asset('img/new/bag2.png') }}" alt="">Documents</a></li>
                                     </li>
                                 </ul>
                             </div>

@@ -51,11 +51,9 @@ Route::get('/404', function () {
 })->name('404');
 
 Route::get('/forums',[ForumController::class, 'index'])->name('forums');
-Route::get('/forums/{id}',[ForumController::class, 'indexCatDetails'])->name('forums.catDetails');
+Route::get('/forums/{slug}',[ForumController::class, 'indexCatDetails'])->name('forums.catDetails');
 
-Route::get('/forum', function () {
-    return view('pages.forums.details');
-})->name('forum');
+Route::get('/forum/{slug}',[ForumController::class, 'showForumDetails'])->name('forum');
 
 Route::get('/forums-de-mon-niveau', function () {
     return view('pages.forums.level');
