@@ -17,9 +17,8 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            // create categories from \App\Models\Category
-            'name' => fake()->name(),
-            'description' => fake()->text(),
+            'name' => $this->faker->firstName(),
+            'description' => $this->faker->sentence(),
         ];
     }
 }

@@ -13,7 +13,8 @@ class StoreContributionsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // TODO : make a stronger autorization
+        return true;
     }
 
     /**
@@ -23,8 +24,25 @@ class StoreContributionsRequest extends FormRequest
      */
     public function rules()
     {
+        // TODO : make a stronger validation on the password (needed?)
         return [
-            //
+            'title' => ['required'],
+            'category' => ['required'],
+            'content' => ['required'],
+            'files.*' => ['mimes:pdf,jpg,png,jpeg'],
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            // 'files.required' => 'Veuillez selectionner un fichier',
+            // 'files' => 'Seuls les pdf et les images jpg, png, jpeg sont autorisées',
         ];
     }
 }

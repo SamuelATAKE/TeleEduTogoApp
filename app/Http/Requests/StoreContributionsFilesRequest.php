@@ -13,7 +13,7 @@ class StoreContributionsFilesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreContributionsFilesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'files' => ['required'],
+            'files.*' => ['mimes:pdf,jpg,png,jpeg'],
         ];
     }
 }

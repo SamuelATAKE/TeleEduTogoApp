@@ -7,16 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/slick/slick.css">
-    <link rel="stylesheet" href="assets/slick/slick-theme.css">
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/slick/slick-theme.css') }}">
     <!-- icon css-->
-    <link rel="stylesheet" href="assets/elagent-icon/style.css">
-    <link rel="stylesheet" href="assets/niceselectpicker/nice-select.css">
-    <link rel="stylesheet" href="assets/animation/animate.css">
-    <link rel="stylesheet" href="assets/mcustomscrollbar/jquery.mCustomScrollbar.min.css">
-    <link rel="stylesheet" href="css/style-main.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="{{ asset('assets/elagent-icon/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/niceselectpicker/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/animation/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/mcustomscrollbar/jquery.mCustomScrollbar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style-main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    @livewireStyles
     <title>TeleEduTogoApp</title>
 </head>
 
@@ -38,8 +39,10 @@
         <nav class="navbar navbar-expand-lg menu_one menu_purple sticky-nav">
             <div class="container">
                 <a class="navbar-brand header_logo" href="/">
-                    <img class="first_logo sticky_logo" style="width: 25%; height:25%" src="img/logo.png" srcset="img/logo.png 2x" alt="logo">
-                    <img class="white_logo main_logo" style="width: 25%; height:25%" src="img/logo.png" srcset="img/logo.png 2x" alt="logo">
+                    <img class="first_logo sticky_logo" style="width: 25%; height:25%" src="img/logo.png"
+                        srcset="img/logo.png 2x" alt="logo">
+                    <img class="white_logo main_logo" style="width: 25%; height:25%" src="img/logo.png"
+                        srcset="img/logo.png 2x" alt="logo">
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -94,18 +97,20 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="v-pills-layout-tab" data-toggle="pill"
-                                                        href="#v-pills-layout" role="tab" aria-controls="v-pills-layout"
-                                                        aria-selected="false">Lycée</a>
+                                                        href="#v-pills-layout" role="tab"
+                                                        aria-controls="v-pills-layout" aria-selected="false">Lycée</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="v-pills-tour-tab" data-toggle="pill"
-                                                        href="#v-pills-tour" role="tab" aria-controls="v-pills-tour"
+                                                        href="#v-pills-tour" role="tab"
+                                                        aria-controls="v-pills-tour"
                                                         aria-selected="false">Université</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="v-pills-content-tab" data-toggle="pill"
                                                         href="#v-pills-content" role="tab"
-                                                        aria-controls="v-pills-content" aria-selected="false">Autres</a>
+                                                        aria-controls="v-pills-content"
+                                                        aria-selected="false">Autres</a>
                                                 </li>
                                                 {{-- <li class="nav-item">
                                                     <a class="nav-link" id="v-pills-pages-tab" data-toggle="pill"
@@ -116,8 +121,8 @@
                                         </div>
                                         <div class="col-lg-7">
                                             <div class="tab-content tabContent" id="v-pills-tabContent">
-                                                <div class="tab-pane fade active show" id="v-pills-doc" role="tabpanel"
-                                                    aria-labelledby="v-pills-doc-tab">
+                                                <div class="tab-pane fade active show" id="v-pills-doc"
+                                                    role="tabpanel" aria-labelledby="v-pills-doc-tab">
                                                     <div class="d-flex">
                                                         <ul class="list-unstyled tab_list">
                                                             <li> <a href="doc-main.html"> CP</a> </li>
@@ -240,23 +245,41 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown submenu">
-                            <a class="nav-link dropdown-toggle" href="{{route('forums')}}" role="button"
+                            <a class="nav-link dropdown-toggle" href="{{ route('forums') }}" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Forum
                             </a>
                             <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
                                 data-toggle="dropdown"></i>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a href="{{route('forums')}}" class="nav-link">Tous les forums</a>
+                                <li class="nav-item"><a href="{{ route('forums') }}" class="nav-link">Tous les
+                                        forums</a>
                                 </li>
-                                <li class="nav-item"><a href="{{ route('forums.level') }}" class="nav-link">Forum de mon
+                                <li class="nav-item"><a href="{{ route('forums.level') }}" class="nav-link">Forum de
+                                        mon
                                         niveau</a></li>
-                                <li class="nav-item"><a href="{{ route('forums.self') }}" class="nav-link">Mes forums</a></li>
+                                <li class="nav-item"><a href="{{ route('forums.self') }}" class="nav-link">Mes
+                                        forums</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown submenu">
-                            <a class="nav-link dropdown-toggle" href="{{ route('blog') }}" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="{{ route('contributions') }}" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Contributions
+                            </a>
+                            <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
+                                data-toggle="dropdown"></i>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a href="{{ route('contributions.create') }}"
+                                        class="nav-link">Ajouter un contribution</a>
+                                </li>
+                                <li class="nav-item"><a href="{{ route('contributions') }}" class="nav-link">Liste
+                                        des contibuions</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown submenu">
+                            <a class="nav-link dropdown-toggle" href="{{ route('blog') }}" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Blog
                             </a>
                             {{-- <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false"
@@ -269,7 +292,7 @@
                                 <li class="nav-item"><a href="blog-single.html" class="nav-link">Blog Details</a></li>
                             </ul> --}}
                         </li>
-                        @auth("web")
+                        @auth('web')
                             <li class="nav-item">
                                 <a href="{{ route('auth.user.logout') }}" class="nav-link ">Déconnexion</a>
                             </li>
@@ -297,7 +320,8 @@
                         <div class="col-lg-4 col-sm-6">
                             <div class="f_widget doc_about_widget wow fadeInUp" data-wow-delay="0.2s">
                                 <a href="#">
-                                    <img style="width: 50%; height: 50%" src="img/logo.png" srcset="img/logo.png 2x" alt="">
+                                    <img style="width: 50%; height: 50%" src="img/logo.png" srcset="img/logo.png 2x"
+                                        alt="">
                                 </a>
                                 <p>TeleEduTogoApp, une puissante application pour l'éducation au Togo</p>
                                 <ul class="list-unstyled">
@@ -315,7 +339,8 @@
                                     <li><a href="#"><img src="img/new/smile2.png" alt="">Forum</a></li>
                                     <li><a href="#"><img src="img/new/doc2.png" alt="">Examens</a></li>
                                     <li><a href="#"><img src="img/new/house2.png" alt="">Cours</a></li>
-                                    <li><a href="#"><img src="img/new/bag2.png" alt="">Documents</a></li>
+                                    <li><a href="#"><img src="img/new/bag2.png" alt="">Documents</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -363,19 +388,20 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery-3.5.1.min.js"></script>
-    <script src="assets/bootstrap/js/popper.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/pre-loader.js"></script>
-    <script src="assets/slick/slick.min.js"></script>
-    <script src="js/jquery.parallax-scroll.js"></script>
-    <script src="assets/niceselectpicker/jquery.nice-select.min.js"></script>
-    <script src="assets/wow/wow.min.js"></script>
-    <script src="assets/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="assets/magnify-pop/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
+    <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('assets/bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/pre-loader.js') }}"></script>
+    <script src="{{ asset('assets/slick/slick.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.parallax-scroll.js') }}"></script>
+    <script src="{{ asset('assets/niceselectpicker/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('assets/wow/wow.min.js') }}"></script>
+    <script src="{{ asset('assets/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ asset('assets/magnify-pop/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    @livewireScripts
 </body>
 
 </html>
