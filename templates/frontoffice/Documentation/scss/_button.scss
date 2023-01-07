@@ -1,0 +1,48 @@
+.action_btn{
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    box-shadow: 0px 20px 30px 0px rgba(12, 118, 142, 0.24);
+    border-radius: 4px;
+    background: $blue;
+    display: inline-block;
+    padding: 14px 28px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .18s ease-in-out;
+    i{
+        vertical-align: middle;
+        font-size: 18px;
+        padding-left: 5px;
+    }
+    &:hover{
+        box-shadow: none;
+        color: #fff;
+    }
+}
+
+.doc_border_btn{
+    border: 2px solid #79ccde;
+    border-radius: 4px;
+    color: $blue;
+    font-size: 16px;
+    font-weight: 500;
+    background: #f8fdfe;
+    display: inline-block;
+    padding: 5px 34px;
+    transition: all 0.3s linear, color 0.2s;
+    i{
+        margin-left: 6px;
+        font-size: 18px;
+        vertical-align: middle;
+        display: inline-block;
+        transition: all 0.2s linear, color 0s linear;
+    }
+    &:hover{
+        box-shadow: 0px 10px 20px 0px rgba(12, 118, 142, 0.2);
+        background: $blue;
+        border-color: $blue;
+        color: #fff;
+        i{
+            transform: translateX(8px);
+        }
+    }
+}

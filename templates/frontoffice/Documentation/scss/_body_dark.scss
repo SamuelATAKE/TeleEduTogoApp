@@ -1,0 +1,74 @@
+.body_dark{
+    color: #d3d4d4;
+    .body_wrapper{
+        background: #131417;
+    }
+    .doc_left_sidebarlist:before{
+        background: #1e1f26;
+    }
+    .nav-sidebar .nav-item {
+        .nav-link {
+            color: #ffffff;
+
+            &.active, &:hover {
+                color: $blue;
+            }
+        }
+        .dropdown_nav li a {
+            color: #bbb;
+        }
+    }
+    .doc_menu .nav-link,
+    .doc_rightsidebar .doc_right_link li a {
+        color: #bbb;
+    }
+    .doc_menu .nav-link.active, .doc_menu .nav-link:hover,
+    h1, h2, h3, h4, h5, h6{
+        color: #fff;
+    }
+    .documentation_item .icon{
+        background: rgba(255, 255, 255, 0.2);
+    }
+    .doc_left_sidebarlist,.nav-sidebar + .nav-sidebar,.doc_rightsidebar,.v_menu,.toggle_body,.basic_table_info,.basic_table_info tbody tr th, .basic_table_info tbody tr td,.typrography_content .code-preview,.doc_left_sidebarlist:before{
+        border-color: #384c59;
+    }
+    .border_bottom{
+        background: #384c59;
+    }
+    .link,.version,.question_box .signup_form .input-group,.tab_shortcode .tab-content{
+        border: 1px solid #384c59;
+        background: #1f3341;
+    }
+    .tab_shortcode .nav-tabs .nav-item .nav-link{
+        background: #1f3341;
+        border-color: #384c59;
+    }
+    .question_box .signup_form .input-group{
+        .form-control{
+            color: #6b707f;
+        }
+        button{
+            &:before{
+                background: #384c59
+            }
+        }
+    }
+    .get_started p{
+        color: #d3d4d4;
+    }
+    .f_bg_color,.page_breadcrumb,.toggle_btn,.doc_accordion .card-header button{
+        background: #1f3341;
+    }
+    .tab_shortcode .nav-tabs .nav-item .nav-link.active,.page_breadcrumb .breadcrumb .breadcrumb-item.active,.breadcrumb-item+.breadcrumb-item::before,.toggle_btn.collapsed:before,.toggle_btn.collapsed,.doc_accordion .card-header button,.table{
+        color: #fff;
+    }
+    .toggle_body,.doc_accordion,.message_alert{
+        background: #061f2f;
+    }
+    .toggle_btn{
+        color: $blue;
+    }
+    .menu > .nav-item.submenu .dropdown-menu .nav-item .nav-link h5{
+        color: #1d2746;
+    }
+}
