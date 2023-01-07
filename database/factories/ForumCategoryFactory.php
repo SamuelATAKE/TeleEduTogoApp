@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ForumCategory>
  */
-class CategoryFactory extends Factory
+class ForumCategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +17,9 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            // create categories from \App\Models\Category
-            'name' => fake()->name(),
-            'description' => fake()->text(),
+            'name' => $this->faker->name,
+            'description' => $this->faker->text,
+            'slug' => $this->faker->uuid,	
         ];
     }
 }

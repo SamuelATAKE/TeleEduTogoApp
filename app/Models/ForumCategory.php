@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class ForumCategory extends Model
 {
     use HasFactory;
+
 
     /**
      * The attributes that are mass assignable.
@@ -20,9 +21,13 @@ class Category extends Model
     ];
 
     /**
-     * Get all of the forums for the Category
+     * Get all of the forums for the ForumCategory
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
 
+    public function forums()
+    {
+        return $this->hasMany(Forum::class, 'category');
+    }
 }

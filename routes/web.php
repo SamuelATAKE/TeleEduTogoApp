@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ForumController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\NiveauController;
@@ -46,9 +47,8 @@ Route::get('/404', function () {
     return view('errors.404');
 })->name('404');
 
-Route::get('/forums', function () {
-    return view('pages.forums.general');
-})->name('forums');
+Route::get('/forums',[ForumController::class, 'index'])->name('forums');
+Route::get('/forums/{id}',[ForumController::class, 'indexCatDetails'])->name('forums.catDetails');
 
 Route::get('/forum', function () {
     return view('pages.forums.details');

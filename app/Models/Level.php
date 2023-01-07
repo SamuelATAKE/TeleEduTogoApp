@@ -36,7 +36,7 @@ class Level extends Model
         );
     }
 
-    // TODO refactorer pour prendre en compte les niveaux universitaires.
+    // TODO : refactorer pour prendre en compte les niveaux universitaires.
     public static function getPreUnivLevel($cycle, $classe, $serie=null) {
         $serie = $serie ? $serie : null; // To convert "" or other null value into `null`
         // Get si existe
