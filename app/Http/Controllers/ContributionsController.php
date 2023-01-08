@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Contributions;
 use App\Services\CategoryService;
 use App\Services\ContributionsService;
+use ZipArchive;
 
 class ContributionsController extends Controller
 {
@@ -148,11 +149,23 @@ class ContributionsController extends Controller
         return redirect()->route('admin.contributions.list');
     }
 
-    public function like(Contributions $contribution) {
+    public function like(Contributions $contribution)
+    {
         $this->contributionsService->contribution_like($contribution);
     }
 
-    public function dislike(Contributions $contribution) {
+    public function dislike(Contributions $contribution)
+    {
         $this->contributionsService->contribution_dislike($contribution);
+    }
+
+    public function download(Contributions $contributions)
+    {
+        $fileName = $this->contributionsService->full_download($contributions);
+
+        if ($fileName) {
+            return response()->download(public_path($fileName));
+        }
+        abort(404);
     }
 }

@@ -55,8 +55,12 @@
                                         <span>{{ $contributionFile->file_extension() }}</span>
                                     </span>
                                 </a>
-                                <small>click to download</small>
                             @endforeach
+                            <small>
+                                <a
+                                    href="{{ route('download.{contributions}.files', ['contributions' => $contributions->routingKey()]) }}">Tout
+                                    télécharger</a>
+                            </small>
                         </div>
                         <div class="forum-post-btm">
                             <div class="taxonomy forum-post-tags">

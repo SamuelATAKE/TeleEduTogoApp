@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-lg-12 form-group">
                     <h6>description</h6>
-                    <textarea class="form-control message" name="content" id="content" placeholder="Enter Your Text ..."></textarea>
+                    <textarea class="form-control message" name="content" id="content"></textarea>
                     @error('content')
                         {{ $message }}
                     @enderror

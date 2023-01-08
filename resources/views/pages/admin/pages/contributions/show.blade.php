@@ -69,7 +69,11 @@
                                         <p> {{ $contributions->content }} </p>
                                     </div>
                                     <div class="col-md-6 mt-2 row">
-                                        <p class="col-md-12">Liste des fichiers associés</p>
+                                        <p class="col-md-12">Liste des fichiers associés
+                                            <span>
+                                                <a href="{{route('download.{contributions}.files', ['contributions' => $contributions->routingKey()])}}">Tout télécharger</a>
+                                            </span>
+                                        </p>
 
                                         <div class="list mt-0">
                                             <ul class="icons row">

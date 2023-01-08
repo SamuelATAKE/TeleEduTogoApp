@@ -120,9 +120,8 @@ Route::get('/contributions', [ContributionsController::class, 'index'])
 Route::get('/{contributions}/show', [ContributionsController::class, 'show'])
     ->name('contribution.{contributions}.show');
 
-// TODO : possibility of all download at once
-// Route::get('/download/{contributionsFiles}', [ContributionsFilesController::class, 'show'])
-//     ->name('download.{contributionsFiles}.show');
+Route::get('/download/{contributions}/files', [ContributionsController::class, 'download'])
+    ->name('download.{contributions}.files');
 
 Route::get('/download/{contributionsFiles}', [ContributionsFilesController::class, 'show'])
     ->name('download.{contributionsFiles}.show');
