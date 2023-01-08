@@ -51,6 +51,7 @@ Route::get('/404', function () {
 })->name('404');
 
 Route::get('/forums',[ForumController::class, 'index'])->name('forums');
+Route::post('/forums',[ForumController::class, 'store'])->name('forums.store')->middleware('auth');
 Route::get('/forums/{slug}',[ForumController::class, 'indexCatDetails'])->name('forums.catDetails');
 
 Route::get('/forum/{slug}',[ForumController::class, 'showForumDetails'])->name('forum');

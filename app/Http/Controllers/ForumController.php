@@ -17,7 +17,6 @@ class ForumController extends Controller
     public function __construct(ForumService $forumService)
     {
         $this->forumService = $forumService;
-        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -50,15 +49,6 @@ class ForumController extends Controller
         return view('pages.forums.details', compact('forum'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -68,7 +58,10 @@ class ForumController extends Controller
      */
     public function store(StoreForumRequest $request)
     {
-        //
+        //dd($request->validated());
+        $validated = $request->validated();
+        $res = $this->forumService->createForum($validated);
+        return redirect()->route('forum', $res->slug)->with('success', 'Forum créé avec succès');
     }
 
     /**
