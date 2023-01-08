@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Services\CategoryService;
 use PhpParser\Node\Stmt\Catch_;
 
 class CategoryController extends Controller
 {
+    private $categoryService;
+
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -93,10 +100,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-
+        $this->categoryService->default_category();
         foreach($category->contributions as $contribution) {
             $contribution->update([
-                'category' => 21,
+                'category' => Category::firstWhere('name', 'default')->id,
             ]);
         }
         $category->delete();

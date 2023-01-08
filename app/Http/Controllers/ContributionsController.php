@@ -7,6 +7,7 @@ use App\Http\Requests\StoreContributionsRequest;
 use App\Http\Requests\UpdateContributionsRequest;
 use App\Models\Category;
 use App\Models\Contributions;
+use App\Services\CategoryService;
 use App\Services\ContributionsService;
 
 class ContributionsController extends Controller
@@ -45,6 +46,7 @@ class ContributionsController extends Controller
      */
     public function create()
     {
+        CategoryService::default_category();
         $categories = Category::all();
         return view("pages.contributions.create", [
             'categories' => $categories,

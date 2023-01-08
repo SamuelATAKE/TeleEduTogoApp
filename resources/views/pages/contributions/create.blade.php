@@ -60,7 +60,6 @@
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
-                        <option value="-1">Autres...</option>
                     </select>
                     @error('category')
                         {{ $message }}
