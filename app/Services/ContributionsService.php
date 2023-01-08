@@ -26,14 +26,28 @@ class ContributionsService {
         ]);
     }
 
-    public static function contribution_like(Contributions $contribution) {
+    public static function contribution_like(Contributions $contribution, $voted=false) {
+        if ($voted) {
+            $dislikes = $contribution->dislike;
+            $contribution->update([
+                'dislike' => $dislikes - 1,
+            ]);
+        }
+
         $likes = $contribution->like;
         $contribution->update([
             'like' => $likes + 1,
         ]);
     }
 
-    public static function contribution_dislike(Contributions $contribution) {
+    public static function contribution_dislike(Contributions $contribution, $voted=false) {
+        if ($voted) {
+            $likes = $contribution->like;
+            $contribution->update([
+                'like' => $likes - 1,
+            ]);
+        }
+
         $dislikes = $contribution->dislike;
         $contribution->update([
             'dislike' => $dislikes + 1,

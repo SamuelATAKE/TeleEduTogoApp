@@ -129,8 +129,6 @@ Route::get('/download/{contributionsFiles}', [ContributionsFilesController::clas
 
 /* Admin routes */
 
-// TODO : using admin/ break the style, i don't know why
-
 Route::get('/admin/contributions', [ContributionsController::class, 'admin_index'])
     ->name('admin.contributions.list');
 

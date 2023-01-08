@@ -12,6 +12,7 @@ class Like extends Component
     public $role;
     public $name;
     public $class;
+    public $voted;
 
     public function mount(Contributions $contribution)
     {
@@ -19,22 +20,27 @@ class Like extends Component
         $this->role = "wire:click=contribution_like";
         $this->name = "Like";
         $this->class = "reply-btn";
+        $this->voted = false;
     }
 
     public function contribution_like()
     {
-        ContributionsService::contribution_like($this->contribution);
+        if (! $this->voted) {} else {}
+        ContributionsService::contribution_like($this->contribution, $this->voted);
         $this->role = "wire:click=contribution_dislike";
         $this->name = "Dislike";
         $this->class = "too-btn";
+        $this->voted = true;
     }
 
     public function contribution_dislike()
     {
-        ContributionsService::contribution_dislike($this->contribution);
+        if (! $this->voted) {} else {}
+        ContributionsService::contribution_dislike($this->contribution, $this->voted);
         $this->role = "wire:click=contribution_like";
         $this->name = "Like";
         $this->class = "reply-btn";
+        $this->voted = true;
     }
 
     public function render()
