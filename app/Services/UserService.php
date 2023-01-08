@@ -76,5 +76,10 @@ class UserService {
         Request()->session()->regenerate();
         Request()->session()->regenerateToken();
     }
+
+    public function getAllUsers() {
+        $users = User::All();
+        return $users;
+    }
 }
 

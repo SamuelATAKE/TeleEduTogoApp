@@ -7,16 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/slick/slick.css">
-    <link rel="stylesheet" href="assets/slick/slick-theme.css">
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/slick/slick-theme.css') }}">
     <!-- icon css-->
-    <link rel="stylesheet" href="assets/elagent-icon/style.css">
-    <link rel="stylesheet" href="assets/niceselectpicker/nice-select.css">
-    <link rel="stylesheet" href="assets/animation/animate.css">
-    <link rel="stylesheet" href="assets/mcustomscrollbar/jquery.mCustomScrollbar.min.css">
-    <link rel="stylesheet" href="css/style-main.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="{{ asset('assets/elagent-icon/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/niceselectpicker/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/animation/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/mcustomscrollbar/jquery.mCustomScrollbar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style-main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+
+    @yield('styles')
+
     <title>TeleEduTogoApp</title>
 </head>
 
@@ -26,7 +29,7 @@
             <div class="round_spinner">
                 <div class="spinner"></div>
                 <div class="text">
-                    <img src="img/spinner_logo.png" alt="">
+                    <img src="{{ asset('img/spinner_logo.png') }}" alt="">
                     <h4><span>TeleEduTogo</span>App</h4>
                 </div>
             </div>
@@ -38,8 +41,8 @@
         <nav class="navbar navbar-expand-lg menu_one menu_purple sticky-nav">
             <div class="container">
                 <a class="navbar-brand header_logo" href="/">
-                    <img class="first_logo sticky_logo" style="width: 25%; height:25%" src="img/logo.png" srcset="img/logo.png 2x" alt="logo">
-                    <img class="white_logo main_logo" style="width: 25%; height:25%" src="img/logo.png" srcset="img/logo.png 2x" alt="logo">
+                    <img class="first_logo sticky_logo" style="width: 25%; height:25%" src="{{ asset('img/logo.png') }}" srcset="img/logo.png 2x" alt="logo">
+                    <img class="white_logo main_logo" style="width: 25%; height:25%" src="{{ asset('img/logo.png') }}" srcset="img/logo.png 2x" alt="logo">
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -363,19 +366,19 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery-3.5.1.min.js"></script>
-    <script src="assets/bootstrap/js/popper.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/pre-loader.js"></script>
-    <script src="assets/slick/slick.min.js"></script>
-    <script src="js/jquery.parallax-scroll.js"></script>
-    <script src="assets/niceselectpicker/jquery.nice-select.min.js"></script>
-    <script src="assets/wow/wow.min.js"></script>
-    <script src="assets/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="assets/magnify-pop/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
+    <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('assets/bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/pre-loader.js') }}"></script>
+    <script src="{{ asset('assets/slick/slick.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.parallax-scroll.js') }}"></script>
+    <script src="{{ asset('assets/niceselectpicker/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('assets/wow/wow.min.js') }}"></script>
+    <script src="{{ asset('assets/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ asset('assets/magnify-pop/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 </body>
 
 </html>

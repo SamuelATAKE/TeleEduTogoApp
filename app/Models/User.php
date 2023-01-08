@@ -24,6 +24,10 @@ class User extends Authenticatable
         return $this->belongsTo(Level::class);
     }
 
+    public function articles() {
+        return $this->hasMany(Article::class);
+    }
+
 
 
     /**
