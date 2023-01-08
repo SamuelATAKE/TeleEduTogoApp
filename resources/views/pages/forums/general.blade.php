@@ -146,8 +146,10 @@
                                         <div class="form-group forum-form-group">
                                             <label for="exampleFormControlTextarea1">Description de la
                                                 question</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                                placeholder="Description de la question" name="content"></textarea>
+
+                                            <input id="x" value="Description de la question" type="hidden"
+                                                name="content">
+                                            <trix-editor input="x"></trix-editor>
                                             <!--validation error-->
                                             @error('content')
                                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -174,10 +176,11 @@
                                             </select>
                                         </div>
                                         <!--custom file upload zone to drag and drop files-->
-                                        <div class="form-group forum-form-group">
+                                        <div class="form-group forum-form-group d-none">
                                             <label for="exampleFormControlFile1">Joindre des fichiers</label>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile" multiple name="file">
+                                                <input type="file" class="custom-file-input" id="customFile" multiple
+                                                    name="file" hidden>
                                                 <label class="custom-file-label" for="customFile">Choisir un
                                                     fichier</label>
                                             </div>
@@ -246,7 +249,8 @@
                                                     <div class="freshness-name">
                                                         <a href="#" title="View Eh Jewel's profile"
                                                             class="bbp-author-link">
-                                                            <span class="bbp-author-name">{{ $category->last_forum_author ? $category->last_forum_author : 'Aucun post' }}</span>
+                                                            <span
+                                                                class="bbp-author-name">{{ $category->last_forum_author ? $category->last_forum_author : 'Aucun post' }}</span>
                                                         </a>
                                                     </div>
                                                     <span class="bbp-author-avatar">
@@ -288,3 +292,16 @@
         <!-- /.container -->
     </div>
 @endsection
+
+@section('scripts')
+    <script>
+        //if DOM is ready vanilla js
+        document.addEventListener("DOMContentLoaded", function(event) {
+            //get trix editor
+            var trixEditor = document.querySelector('trix-editor');
+            //add event listener
+            trixEditor.addEventListener("trix-file-accept", function(event) {
+                preventDefault();
+            })
+        });
+    </script>

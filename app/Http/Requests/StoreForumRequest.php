@@ -24,12 +24,10 @@ class StoreForumRequest extends FormRequest
     public function rules()
     {
         return [
-
-            //must contain : title, content, category, file : images
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category' => 'required|integer',
-            'file' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg | max:2048',
+            //'file' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg | max:2048',
         ];
     }
 
@@ -48,10 +46,6 @@ class StoreForumRequest extends FormRequest
             'content.string' => 'Le contenu doit être une chaîne de caractères',
             'category.required' => 'La catégorie est requise',
             'category.integer' => 'La catégorie doit être un entier',
-            'file.required' => 'Le fichier est requis',
-            'file.file' => 'File doit être un fichier',
-            'file.mimes' => 'File doit être de type jpeg, png, jpg, gif, svg',
-            'file.max' => 'Le fichier ne doit pas dépasser 2048 octets',
         ];
     }
 }

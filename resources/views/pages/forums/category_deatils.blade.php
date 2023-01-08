@@ -146,8 +146,9 @@
                                         <div class="form-group forum-form-group">
                                             <label for="exampleFormControlTextarea1">Description de la
                                                 question</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                                placeholder="Description de la question" name="content"></textarea>
+                                                <input id="x" value="Description de la question" type="hidden"
+                                                name="content">
+                                            <trix-editor input="x"></trix-editor>
                                             <!--validation error-->
                                             @error('content')
                                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
