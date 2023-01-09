@@ -23,8 +23,8 @@ Table of Content:
 08/ blog
 09/ service
 10/ blog
-11/ contact 
-12/ footer 
+11/ contact
+12/ footer
 
 
 =====================================================================*/
@@ -13626,6 +13626,10 @@ input[type=number] {
 
 .forum-post-content {
   padding-left: 62px;
+}
+.forum-post-content img {
+  max-width: 100%;
+  height: auto;
 }
 .forum-post-content .forum-post-btm {
   display: flex;

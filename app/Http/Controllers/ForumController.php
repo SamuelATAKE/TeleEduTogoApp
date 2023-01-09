@@ -46,7 +46,23 @@ class ForumController extends Controller
     public function showForumDetails($slug)
     {
         $forum = Forum::firstWhere('slug', $slug);
-        return view('pages.forums.details', compact('forum'));
+        //similarForums
+        $similarForums = Forum::where('category', $forum->category)
+            ->where('id', '!=', $forum->id)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+        return view('pages.forums.details', compact('forum', 'similarForums'));
+    }
+
+    /**
+     * Peersonnal forums
+     */
+    public function personalForums()
+    {
+        $forums = $this->forumService->getPersonnalForumsWithCategories();
+        $categories = ForumCategory::all();
+        return view('pages.forums.self', compact('forums', 'categories'));
     }
 
 

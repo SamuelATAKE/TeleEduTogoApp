@@ -60,9 +60,7 @@ Route::get('/forums-de-mon-niveau', function () {
     return view('pages.forums.level');
 })->name('forums.level');
 
-Route::get('/mes-forums', function () {
-    return view('pages.forums.self');
-})->name('forums.self');
+Route::get('/mes-forums',[ForumController::class,'personalForums'])->name('forums.self');
 
 Route::get('/blog', function () {
     return view('pages.blog.index');

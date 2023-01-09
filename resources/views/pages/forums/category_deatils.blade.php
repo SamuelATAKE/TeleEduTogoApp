@@ -146,9 +146,8 @@
                                         <div class="form-group forum-form-group">
                                             <label for="exampleFormControlTextarea1">Description de la
                                                 question</label>
-                                                <input id="x" value="Description de la question" type="hidden"
-                                                name="content">
-                                            <trix-editor input="x"></trix-editor>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                                name="content"></textarea>
                                             <!--validation error-->
                                             @error('content')
                                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -173,18 +172,6 @@
                                                 <option>Lycée</option>
                                                 <option>Université</option>
                                             </select>
-                                        </div>
-                                        <!--custom file upload zone to drag and drop files-->
-                                        <div class="form-group forum-form-group">
-                                            <label for="exampleFormControlFile1">Joindre des fichiers</label>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile" multiple name="file">
-                                                <label class="custom-file-label" for="customFile">Choisir un
-                                                    fichier</label>
-                                            </div>
-                                            @error('file')
-                                                <div class="alert alert-danger mt-2">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -304,4 +291,18 @@
         </div>
         <!-- /.container -->
     </div>
+@endsection
+@section('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            tinymce.init({
+                selector: 'textarea', // change this value according to your HTML
+                plugins: ['a_tinymce_plugin', 'image', 'link'],
+                a_plugin_option: true,
+                a_configuration_option: 400,
+                images_file_types: 'jpg,svg,webp,png',
+                file_picker_types: 'file image media'
+            });
+        });
+    </script>
 @endsection

@@ -1,5 +1,4 @@
 @extends('layouts.default')
-
 @section('content')
     <!--================Forum Breadcrumb Area =================-->
     <section class="doc_banner_area search-banner-light"
@@ -147,9 +146,7 @@
                                             <label for="exampleFormControlTextarea1">Description de la
                                                 question</label>
 
-                                            <input id="x" value="Description de la question" type="hidden"
-                                                name="content">
-                                            <trix-editor input="x"></trix-editor>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"></textarea>
                                             <!--validation error-->
                                             @error('content')
                                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -295,13 +292,15 @@
 
 @section('scripts')
     <script>
-        //if DOM is ready vanilla js
         document.addEventListener("DOMContentLoaded", function(event) {
-            //get trix editor
-            var trixEditor = document.querySelector('trix-editor');
-            //add event listener
-            trixEditor.addEventListener("trix-file-accept", function(event) {
-                preventDefault();
-            })
+            tinymce.init({
+                selector: 'textarea', // change this value according to your HTML
+                plugins: ['a_tinymce_plugin', 'image', 'link'],
+                a_plugin_option: true,
+                a_configuration_option: 400,
+                images_file_types: 'jpg,svg,webp,png',
+                file_picker_types: 'file image media'
+            });
         });
     </script>
+@endsection

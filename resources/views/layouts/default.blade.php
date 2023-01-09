@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -402,7 +402,8 @@
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/xqabqz33jp8ly38i2o9pf8zc8hvr2bbm0oswzn6b2kn2e0a6/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>
     @yield('scripts')
     @livewireScripts
 </body>

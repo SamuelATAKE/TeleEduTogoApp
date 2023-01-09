@@ -55,6 +55,19 @@ class ForumService
     {
         return \App\Models\Forum::with('category')->paginate(30);
     }
+    /**
+     * Get personnal forums with categories
+     *
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+
+     public function getPersonnalForumsWithCategories()
+     {
+         return \App\Models\Forum::with('category')
+             ->where('author', Auth::user()->id)
+             ->paginate(20);
+     }
 
     /**
      * Forum creation
@@ -71,17 +84,6 @@ class ForumService
             'category' => $request['category'],
             'slug' => Str::uuid().'-'.Str::slug($request['title'], '-'),
         ]);
-
-        if ($request['file']) {
-            foreach ($request['file'] as $image) {
-                $name = $image->getClientOriginalName();
-                $image->move(public_path() . '/images/', $name);
-                $data[] = $name;
-                $forum->forumImages()->create([
-                    'image' => $name
-                ]);
-            }
-        }
         return $forum;
     }
 

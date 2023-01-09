@@ -16,7 +16,8 @@ class Forum extends Model
         'category',
         'likes',
         'dislikes',
-        'slug'
+        'slug',
+        'tags'
     ];
 
     public function author()

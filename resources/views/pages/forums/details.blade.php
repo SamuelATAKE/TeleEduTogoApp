@@ -96,10 +96,10 @@
     <section class="doc_blog_grid_area sec_pad forum-single-content">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-9">
                     <!-- Forum post top area -->
                     <div class="row">
-                        <div class="col-lg-9">
+                        <div class="col-9">
                             <div class="forum-post-top">
                                 <a class="author-avatar" href="#">
                                     <img src="img/forum/author-avatar.png" alt="">
@@ -133,14 +133,16 @@
                         <h1>{{ $forum->title }}</h1>
                     </div>
                     <div class="forum-post-content">
-                        <div class="content">
+                        <div class="px-5 d-flex justify-content-center">
                             <!-- display  as html -->
                             {!! $forum->content !!}
                         </div>
                         <div class="forum-post-btm">
                             <div class="taxonomy forum-post-tags">
-                                <i class="icon_tags_alt"></i><a href="#">Bug</a>, <a href="#">Feature</a>, <a
-                                    href="#">Error</a>
+                                <i class="icon_tags_alt"></i>
+                                @foreach (explode(' ', $forum->tags) as $tag)
+                                    <a href="#">{{ $tag }}</a>
+                                @endforeach
                             </div>
                             <div class="taxonomy forum-post-cat">
                                 <img src="img/forum/logo-favicon.png" alt=""><a
@@ -148,8 +150,29 @@
                             </div>
                         </div>
                         <div class="action-button-container action-btns">
-                            <a href="#" class="action_btn btn-ans ask-btn reply-btn">Répondre</a>
+                            <a href="#" class="action_btn btn-ans ask-btn reply-btn" data-toggle="collapse"
+                                data-target="#reply-form" aria-expanded="false" aria-controls="reply-form">
+                                <i class="icon_comment_alt"></i>
+                                <span class="btn-text">Répondre</span>
+                            </a>
                         </div>
+                        <!-- Reply form -->
+                        <div class="collapse" id="reply-form">
+                            <div class="reply-form card card-body mt-4">
+                                <form action="" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="forum_id" value="{{ $forum->id }}">
+                                    <div class="form-group  mb-4">
+                                        <label for="reply">Votre réponse</label>
+                                        <textarea class="form-control" name="content" id="reply" rows="5"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-sm btn-primary">Répondre</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- Best answer -->
@@ -263,9 +286,37 @@
                         </div>
                     @endif
                 </div>
-                <!-- /.col-lg-8 -->
-            </div>
-        </div>
+                <!-- simular question -->
+                <div class="col-3">
+                    <!-- Sidebar content -->
+                    <div>
+                        <div
+                            style="visibility: hidden; display: none; width: 285px; height: 801px; margin: 0px; float: none; position: static; inset: 85px auto auto;">
+                        </div>
+                        <div data-settings="{&quot;parent&quot;:&quot;#content&quot;,&quot;mind&quot;:&quot;#header&quot;,&quot;top&quot;:10,&quot;breakpoint&quot;:992}"
+                            data-toggle="sticky" class="sticky" style="top: 85px;">
+                            <div class="sticky-inner">
+                                <div class="bg-white mb-3">
+                                    <h4 class="px-3 py-4 op-5 m-0">
+                                        Questions similaires
+                                    </h4>
+                                    @foreach ($similarForums as $similarForum)
+                                        <div class="px-3 py-3 border-bottom">
+                                            <h6 class="text-black mb-0">
+                                                <a href="{{ route('forum', $similarForum->slug) }}"
+                                                    class="text-black">{{ $similarForum->title }}</a>
+                                            </h6>
+                                            <p class="mb-0 text-sm"><span class="op-6">Posté</span> <a
+                                                    href="#">{{ $similarForum->created_at->diffForHumans() }}</a>
+                                                <a class="text-black"
+                                                    href="#">{{ $similarForum->author()->first()->name }}</a>
+                                            </p>
+                                            </p>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
     </section>
 
     <div class="call-to-action">
@@ -282,4 +333,19 @@
         </div>
         <!-- /.container -->
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            tinymce.init({
+                selector: 'textarea', // change this value according to your HTML
+                plugins: ['a_tinymce_plugin', 'image', 'link'],
+                a_plugin_option: true,
+                a_configuration_option: 400,
+                images_file_types: 'jpg,svg,webp,png',
+                file_picker_types: 'file image media'
+            });
+        });
+    </script>
 @endsection
