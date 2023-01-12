@@ -277,7 +277,7 @@
                                 <a href="{{ route('auth.user.logout') }}" class="nav-link ">Déconnexion</a>
                             </li>
                             <div class="right-nav">
-                                <a class="nav_btn" href="#">{{Auth::guard('web')->user()->lastname}} {{Auth::guard('web')->user()->level->fullName}}</a>
+                                <a class="nav_btn" href="{{ route('profil.index') }}">{{Auth::guard('web')->user()->lastname}} {{Auth::guard('web')->user()->level->fullName}}</a>
                             </div>
                         @endauth
                     </ul>

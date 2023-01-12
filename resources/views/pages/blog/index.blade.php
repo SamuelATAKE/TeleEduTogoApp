@@ -158,9 +158,10 @@
                             <h4 class="b_title">{{ $article->titre }}</h4>
                         </a>
                         <p>
-                            @php
-                            echo substr($article->contenu, 0, 30);
-                            @endphp
+                            {{-- @php
+                            echo substr($article->contenu, 0, 5);
+                            @endphp --}}
+                            ...
                         </p>
                         <div class="media post_author">
                             <div class="round_img">
@@ -208,7 +209,7 @@
         </div>
     </div>
 </section>
-<section class="doc_blog_grid_area_two">
+{{-- <section class="doc_blog_grid_area_two">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-6">
@@ -288,6 +289,6 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 @endsection

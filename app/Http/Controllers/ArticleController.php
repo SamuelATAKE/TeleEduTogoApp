@@ -86,6 +86,7 @@ class ArticleController extends Controller
         //
         $article = $this->articleService->getArticleById($id);
         $numArticle = $article->commentaires->count();
+        // dd($article->commentaires);
         return view('pages.blog.details', compact('article', 'numArticle'));
     }
 

@@ -24,6 +24,8 @@ class CommentaireArticleService
     {
         $validatedInputs = Request()->validate([
             'contenu' => 'required',
+            'commentateur' => 'required',
+            'email' => 'required',
             'article_id' => 'required',
         ]);
         return $validatedInputs;
@@ -36,6 +38,9 @@ class CommentaireArticleService
 
         $commentaire->contenu = $input['contenu'];
         $commentaire->article_id = $input['article_id'];
+        $commentaire->commentateur = $input['commentateur'];
+        $commentaire->email = $input['email'];
+        $commentaire->like = 0;
         // $article->save();
 
         return $commentaire;

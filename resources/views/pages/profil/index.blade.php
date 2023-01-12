@@ -16,7 +16,7 @@
     </ul>
     <div class="container">
         <div class="doc_banner_content">
-            <h2 class="text-white">Docteur Parfait</h2>
+            <h2 class="text-white">{{Auth::guard('web')->user()->lastname}} {{Auth::guard('web')->user()->firstname}}</h2>
             <ul class="nav justify-content-center">
                 <li><a href="#">Accueil</a></li>
                 <li><a class="active" href="#">Informations personnelles</a></li>
@@ -84,7 +84,7 @@
                                                 <a href="#">
                                                     <h4>Sujets créés</h4>
                                                 </a>
-                                                <a class="info_number" href="#">32</a>
+                                                <a class="info_number" href="#">0</a>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -93,12 +93,12 @@
                                                 <a href="#">
                                                     <h4>Réponses suggérées</h4>
                                                 </a>
-                                                <a class="info_number" href="#">76</a>
+                                                <a class="info_number" href="#">0</a>
                                             </div>
                                         </div>
                                     </div>
                                     <ul class="navbar-nav info_list">
-                                        <li><span>Nom:</span><a href="#">Docteur Parfait</a></li>
+                                        <li><span>Nom:</span><a href="#">{{Auth::guard('web')->user()->lastname}} {{Auth::guard('web')->user()->firstname}}</a></li>
                                         <li><span>Date de naissance:</span><a href="#">28-04-2001</a></li>
                                         <li><span>Genre:</span><a href="#">Masculin</a></li>
                                         <li><span>Adresse de résidence:</span><a href="#">Zanguéra - Lomé</a></li>
@@ -109,7 +109,7 @@
                                         </li>
                                         <li><span>Blog:</span><a href="#">https://wp.spider-themes.com/Docy/</a></li>
                                         --}}
-                                        <li><span>Inscrit:</span><a href="#">3 ans, 6 mois de cela</a></li>
+                                        <li><span>Inscrit le:</span><a href="#">{{Auth::guard('web')->user()->created_at}}</a></li>
                                     </ul>
                                     <ul class="nav p_social">
                                         <li><a href="#"><i class="social_facebook"></i></a></li>

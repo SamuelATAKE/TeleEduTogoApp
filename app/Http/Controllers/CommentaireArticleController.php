@@ -44,9 +44,8 @@ class CommentaireArticleController extends Controller
     {
         //
         $input = $this->commentaireArticleService->validateStoreRequest();
-
         $newCommentaire= $this->commentaireArticleService->addCommentaire($input);
-
+        // dd($newCommentaire);
         $newCommentaire->save();
 
         return back();

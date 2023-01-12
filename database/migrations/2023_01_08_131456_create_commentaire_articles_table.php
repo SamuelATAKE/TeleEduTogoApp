@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('commentaire_articles', function (Blueprint $table) {
             $table->id();
             $table->text('contenu');
+            $table->string('commentateur')->nullable();
+            $table->string('email')->nullable();
             $table->string('slug')->nullable();
             $table->integer('like');
 

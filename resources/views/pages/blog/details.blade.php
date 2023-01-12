@@ -110,7 +110,7 @@
                                     <img class="img_rounded" src="{{ asset('img/blog-single/comment_01.jpg') }}" alt="">
                                     <div class="media-body">
                                         <div class="comment_info">
-                                            <h3>{{ $commentaire->user->firstname }} {{ $commentaire->user->lastname }}
+                                            <h3>{{ $commentaire->commentateur}}
                                             </h3>
                                             <div class="comment_date">{{ $commentaire->created_at }}</div>
                                         </div>
@@ -129,17 +129,22 @@
                     <div class="blog_comment_box topic_comment">
                         <h2 class="c_head">Laisser un commentaire</h2>
                         <p>Votre adresse mail ne sera pa publiée. Les champs réquis sont marqués *</p>
-                        <form class="get_quote_form row" action="#" method="post">
+                        <form class="get_quote_form row" action="{{ route('article.commentaire.store') }}" method="post">
+                            @csrf
+                            @method('post')
+                            {{-- <div class="col-md-6 form-group"> --}}
+                                <input type="hidden" class="form-control" name="article_id" id="article_id" value="{{ $article->id }}">
+                            {{-- </div> --}}
                             <div class="col-md-6 form-group">
-                                <input type="text" class="form-control" id="name" required>
+                                <input type="text" class="form-control" name="commentateur" id="name" required>
                                 <label class="floating-label">Nom complet *</label>
                             </div>
                             <div class="col-md-6 form-group">
-                                <input type="email" class="form-control" id="email" required>
+                                <input type="email" class="form-control" name="email" id="email" required>
                                 <label class="floating-label">Email *</label>
                             </div>
                             <div class="col-md-12 form-group">
-                                <textarea class="form-control message" required></textarea>
+                                <textarea class="form-control message" name="contenu" required></textarea>
                                 <label class="floating-label">Commentaire...</label>
                             </div>
                             <div class="col-md-12 form-group check_input">
@@ -147,8 +152,9 @@
                                 <label for="fruit1">Sauvegarder mon nom, mon email dans le navigateur pour mon projet
                                     commentaire</label>
                             </div>
-                            <div class="col-md-12 form-group"><button class="btn action_btn thm_btn"
-                                    type="submit">Poster le Commentaire</button></div>
+                            <div class="col-md-12 form-group">
+                                <button class="btn action_btn thm_btn" type="submit">Poster le Commentaire</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -166,7 +172,7 @@
                     </div>
                     <div class="widget categorie_widget">
                         <h4 class="c_head">Post Categories</h4>
-                        <ul class="list-unstyled categorie_list">
+                        {{-- <ul class="list-unstyled categorie_list">
                             <li><a href="#">Creative <span>(12)</span></a></li>
                             <li><a href="#">Inspiration <span>(8)</span></a></li>
                             <li><a href="#">Lifestyle <span>(3)</span></a></li>
@@ -175,7 +181,7 @@
                             <li><a href="#">Skill <span>(15)</span></a></li>
                             <li><a href="#">Tourist Tours <span>(10)</span></a></li>
                             <li><a href="#">Inspire <span>(5)</span></a></li>
-                        </ul>
+                        </ul> --}}
                     </div>
                     <div class="widget recent_news_widget">
                         <h4 class="c_head">Articles récents</h4>
@@ -247,7 +253,7 @@
                     </div>
                     <div class="widget tag_widget">
                         <h4 class="c_head">Tags</h4>
-                        <ul class="list-unstyled w_tag_list">
+                        {{-- <ul class="list-unstyled w_tag_list">
                             <li><a href="#">Design</a></li>
                             <li><a href="#">Apps</a></li>
                             <li><a href="#">Photography</a></li>
@@ -260,7 +266,7 @@
                             <li><a href="#">Doc Design</a></li>
                             <li><a href="#">ui/ux</a></li>
                             <li><a href="#">Docs</a></li>
-                        </ul>
+                        </ul> --}}
                     </div>
 
                 </div>

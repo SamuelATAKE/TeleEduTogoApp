@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentaireArticleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\NiveauController;
@@ -73,6 +74,8 @@ Route::get('/blog', [ArticleController::class, 'index'])->name('blog');
 Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article');
 
 Route::post('/ajout-article', [ArticleController::class, 'store'])->name('article.store');
+
+Route::post('/ajout-commentaire', [CommentaireArticleController::class, 'store'])->name('article.commentaire.store');
 
 Route::get('/ajouter-article', function () {
     return view('pages.blog.create');
