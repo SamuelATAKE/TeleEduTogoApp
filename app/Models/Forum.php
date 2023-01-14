@@ -16,7 +16,8 @@ class Forum extends Model
         'category',
         'likes',
         'dislikes',
-        'level'
+        'slug',
+        'tags'
     ];
 
     public function author()
@@ -26,12 +27,12 @@ class Forum extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category');
+        return $this->belongsTo(ForumCategory::class, 'category');
     }
 
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'forum');
+        return $this->hasMany(Comments::class, 'forum');
     }
 
     public function forumImages()

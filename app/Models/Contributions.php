@@ -47,5 +47,17 @@ class Contributions extends Model
         $this->dislikes = $dislikes;
     }
 
+    public function routingKey() {
+        return $this->id;
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
+
+    public function contentTruncate() {
+        return \Illuminate\Support\Str::limit($this->content, 100, $end='...');
+    }
 
 }

@@ -4,10 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreContributionsFilesRequest;
 use App\Http\Requests\UpdateContributionsFilesRequest;
+use App\Models\Contributions;
 use App\Models\ContributionsFiles;
+use App\Services\ContributionsFilesService;
+use Illuminate\Support\Facades\Storage;
 
 class ContributionsFilesController extends Controller
 {
+    private $contributionsFilesService;
+
+    public function __construct(ContributionsFilesService $contributionsFilesService)
+    {
+        $this->contributionsFilesService = $contributionsFilesService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,9 +43,9 @@ class ContributionsFilesController extends Controller
      * @param  \App\Http\Requests\StoreContributionsFilesRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreContributionsFilesRequest $request)
+    public static function store($file, Contributions $contribution)
     {
-        //
+        ContributionsFilesService::create_contributions_file($file, $contribution);
     }
 
     /**
@@ -47,7 +56,7 @@ class ContributionsFilesController extends Controller
      */
     public function show(ContributionsFiles $contributionsFiles)
     {
-        //
+        return response()->download(public_path($contributionsFiles->file_path . $contributionsFiles->file_name));
     }
 
     /**
@@ -79,8 +88,8 @@ class ContributionsFilesController extends Controller
      * @param  \App\Models\ContributionsFiles  $contributionsFiles
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContributionsFiles $contributionsFiles)
+    public static function destroy(ContributionsFiles $contributionsFiles)
     {
-        //
+        $contributionsFiles->delete();
     }
 }

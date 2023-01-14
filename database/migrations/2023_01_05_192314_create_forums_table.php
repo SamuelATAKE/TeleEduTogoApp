@@ -17,12 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            //use  foreignkeu constrained()
             $table->foreignId('author')->constrained('users');
-            $table->foreignId('category')->constrained('categories');
+            $table->foreignId('category')->constrained('forum_categories');
             $table->integer('likes')->default(0);
             $table->integer('dislikes')->default(0);
-            $table->foreignId('level')->constrained('levels');
+            $table->string('tags')->nullable();
+            //$table->foreignId('level')->constrained('levels');
+            $table->uuid('slug')->unique()->generatedAs('uuid_generate_v4()');
             $table->timestamps();
         });
     }

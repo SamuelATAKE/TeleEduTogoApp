@@ -15,6 +15,7 @@ class Comments extends Model
         'forum',
         'likes',
         'dislikes',
+        'is_answer'
     ];
 
     public function author()

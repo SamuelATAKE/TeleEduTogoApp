@@ -13,7 +13,7 @@ class StoreForumRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,28 @@ class StoreForumRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'category' => 'required|integer',
+            //'file' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg | max:2048',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'Le titre est requis',
+            'title.string' => 'Le titre doit être une chaîne de caractères',
+            'title.max' => 'Le titre ne doit pas dépasser 255 caractères',
+            'content.required' => 'Le contenu est requis',
+            'content.string' => 'Le contenu doit être une chaîne de caractères',
+            'category.required' => 'La catégorie est requise',
+            'category.integer' => 'La catégorie doit être un entier',
         ];
     }
 }
