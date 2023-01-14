@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+
+    @yield('styles')
+
     <title>TeleEduTogoApp</title>
 </head>
 
@@ -28,7 +31,9 @@
             <div class="round_spinner">
                 <div class="spinner"></div>
                 <div class="text">
+
                     <img src={{ asset('img/spinner_logo.png') }} alt="logo">
+
                     <h4><span>TeleEduTogo</span>App</h4>
                 </div>
             </div>
@@ -44,6 +49,7 @@
                         srcset="{{ asset('img/logo.png') }} 2x" alt="logo">
                     <img class="white_logo main_logo" style="width: 25%; height:25%" src="{{ asset('img/logo.png') }}"
                         srcset="{{ asset('img/logo.png') }} 2x" alt="logo">
+
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -298,7 +304,9 @@
                                 <a href="{{ route('auth.user.logout') }}" class="nav-link ">Déconnexion</a>
                             </li>
                             <div class="right-nav">
-                                <a class="nav_btn" href="#">{{Auth::guard('web')->user()->lastname}}</a>
+
+                               {{-- <a class="nav_btn" href="#">{{Auth::guard('web')->user()->lastname}}</a> --}}
+                                <a class="nav_btn" href="{{ route('profil.index') }}">{{Auth::guard('web')->user()->lastname}} {{Auth::guard('web')->user()->level->fullName}}</a>
                             </div>
                         @endauth
                     </ul>
@@ -406,6 +414,7 @@
     referrerpolicy="origin"></script>
     @yield('scripts')
     @livewireScripts
+
 </body>
 
 </html>
