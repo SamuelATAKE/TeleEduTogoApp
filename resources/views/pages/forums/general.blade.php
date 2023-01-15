@@ -265,7 +265,6 @@
                 @endforeach
                 <!-- Pagination  laravel bootstrap -->
                 <div class="justify-content-center mt-3">
-                    {{ $forums->links() }}
                 </div>
             @endif
 
