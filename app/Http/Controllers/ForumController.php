@@ -17,7 +17,6 @@ class ForumController extends Controller
     public function __construct(ForumService $forumService)
     {
         $this->forumService = $forumService;
-        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -47,18 +46,25 @@ class ForumController extends Controller
     public function showForumDetails($slug)
     {
         $forum = Forum::firstWhere('slug', $slug);
-        return view('pages.forums.details', compact('forum'));
+        //similarForums
+        $similarForums = Forum::where('category', $forum->category)
+            ->where('id', '!=', $forum->id)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+        return view('pages.forums.details', compact('forum', 'similarForums'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Peersonnal forums
      */
-    public function create()
+    public function personalForums()
     {
-        //
+        $forums = $this->forumService->getPersonnalForumsWithCategories();
+        $categories = ForumCategory::all();
+        return view('pages.forums.self', compact('forums', 'categories'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -68,7 +74,10 @@ class ForumController extends Controller
      */
     public function store(StoreForumRequest $request)
     {
-        //
+        //dd($request->validated());
+        $validated = $request->validated();
+        $res = $this->forumService->createForum($validated);
+        return redirect()->route('forum', $res->slug)->with('success', 'Forum créé avec succès');
     }
 
     /**

@@ -75,29 +75,39 @@
 
 <section class="blog_top_post_area sec_pad bg_color">
     <div class="container">
+        <div class="row mb-3">
+            <div class="col-8"></div>
+            <div class="col-5">
+                <a href="{{ route('article.add') }}"><button class="btn btn-lg btn-primary">Ajouter un
+                        article</button></a>
+            </div>
+        </div>
         <div class="row blog_top_post flex-row-reverse shadow">
             <div class="col-lg-7 p_top_img">
-                <img class="p_img" src="img/blog-grid/top_post.jpg" alt="">
+                <img class="p_img" src="{{ $lastArticle->illustration }}" alt="">
             </div>
             <div class="col-lg-5 p-0">
                 <div class="b_top_post_content">
                     <div class="post_tag">
                         <a href="#">9 Min de lecture</a>
-                        <a class="c_blue" href="#">WordPress</a>
+                        <a class="c_blue" href="#">{{ $lastArticle->categorie }}</a>
                     </div>
-                    <a href="#">
-                        <h3>10 WordPress Security Issues And How to Fix Them</h3>
+                    <a href="{{ route('article', $lastArticle->id) }}">
+                        <h3>{{ $lastArticle->titre }}</h3>
                     </a>
-                    <p>Tinkety tonk old fruit bodge on your bike mate car boot my good sir jolly good such a fibber up
-                        the kyver golly gosh David, naff chap.!</p>
-                    <a href="{{ route('article') }}" class="learn_btn">Continuer par lire<i class="arrow_right"></i></a>
+                    <p>
+                        @php
+                        echo substr($lastArticle->contenu, 0, 30);
+                        @endphp
+                    </p>
+                    <a href="{{ route('article', $lastArticle->id) }}" class="learn_btn">Continuer par lire<i class="arrow_right"></i></a>
                     <div class="media post_author">
                         <div class="round_img">
                             <img src="img/blog-grid/ansley.jpg" alt="">
                         </div>
                         <div class="media-body author_text">
-                            <h4>Jason Response</h4>
-                            <div class="date">Sep 14, 2020</div>
+                            <h4>{{ $lastArticle->user->firstname}} {{ $lastArticle->user->firstname }}</h4>
+                            <div class="date">{{ $lastArticle->created_at }}</div>
                         </div>
                     </div>
                 </div>
@@ -135,150 +145,39 @@
     </div>
     <div class="container">
         <div class="row blog_grid_tab">
+            @forelse ($articles as $article)
             <div class="col-lg-4 col-sm-6">
                 <div class="blog_grid_post shadow-sm wow fadeInUp">
-                    <img src="img/blog-grid/blog_grid_post1.jpg" alt="">
+                    <img src="{{ $article->illustration }}" alt="">
                     <div class="grid_post_content">
                         <div class="post_tag">
                             <a href="#">18 Min de lecture</a>
-                            <a class="c_blue" href="#">WordPress</a>
+                            <a class="c_blue" href="#">{{ $article->categorie }}</a>
                         </div>
-                        <a href="{{route('article')}}">
-                            <h4 class="b_title">Is Your Store Safe From Magento Killer?</h4>
+                        <a href="{{route('article', $article->id)}}">
+                            <h4 class="b_title">{{ $article->titre }}</h4>
                         </a>
-                        <p>The pressure to keep our skills sharp is constant. Mastering new skills may...</p>
+                        <p>
+                            {{-- @php
+                            echo substr($article->contenu, 0, 5);
+                            @endphp --}}
+                            ...
+                        </p>
                         <div class="media post_author">
                             <div class="round_img">
-                                <img src="img/blog-grid/author_1.jpg" alt="">
+                                <img src="{{ $article->illustration }}" alt="">
                             </div>
                             <div class="media-body author_text">
-                                <h4>Jason Response</h4>
-                                <div class="date">Sep 14, 2020</div>
+                                <h4>{{ $article->user->firstname}} {{ $article->user->firstname }}</h4>
+                                <div class="date">{{ $article->created_at }}</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="blog_grid_post shadow-sm wow fadeInUp" data-wow-delay="0.2s">
-                    <img src="img/blog-grid/blog_grid_post2.jpg" alt="">
-                    <div class="grid_post_content">
-                        <div class="post_tag">
-                            <a href="#">18 Min de lecture</a>
-                            <a class="cat-Docy orange" href="#">Docy</a>
-                        </div>
-                        <a href="{{route('article')}}">
-                            <h4 class="b_title">70 Best Startups You Need to Watch Out for</h4>
-                        </a>
-                        <p>The pressure to keep our skills sharp is constant. Mastering new skills may...</p>
-                        <div class="media post_author">
-                            <div class="round_img">
-                                <img src="img/blog-grid/author_2.jpg" alt="">
-                            </div>
-                            <div class="media-body author_text">
-                                <h4>Druid Wensleydale</h4>
-                                <div class="date">Sep 14, 2020</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="blog_grid_post shadow-sm wow fadeInUp" data-wow-delay="0.4s">
-                    <img src="img/blog-grid/blog_grid_post3.jpg" alt="">
-                    <div class="grid_post_content">
-                        <div class="post_tag">
-                            <a href="#">10 Min de lecture</a>
-                            <a class="cat-laravel green" href="#">Laravel</a>
-                        </div>
-                        <a href="{{route('article')}}">
-                            <h4 class="b_title">Create Conditional Logic Forms & Publish</h4>
-                        </a>
-                        <p>The pressure to keep our skills sharp is constant. Mastering new skills may...</p>
-                        <div class="media post_author">
-                            <div class="round_img">
-                                <img src="img/blog-grid/author_3.jpg" alt="">
-                            </div>
-                            <div class="media-body author_text">
-                                <h4>Douglas Lyphe</h4>
-                                <div class="date">Nov 10, 2020</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="blog_grid_post shadow-sm wow fadeInUp" data-wow-delay="0.2s">
-                    <img src="img/blog-grid/blog_grid_post4.jpg" alt="">
-                    <div class="grid_post_content">
-                        <div class="post_tag">
-                            <a href="#">18 Min de lecture</a>
-                            <a class="cat-woocommerce" href="#">WooCommerce</a>
-                        </div>
-                        <a href="{{route('article')}}">
-                            <h4 class="b_title">How to Use Forms for Enhancing UX In WordPress</h4>
-                        </a>
-                        <p>The pressure to keep our skills sharp is constant. Mastering new skills may...</p>
-                        <div class="media post_author">
-                            <div class="round_img">
-                                <img src="img/blog-grid/author_4.jpg" alt="">
-                            </div>
-                            <div class="media-body author_text">
-                                <h4>Indigo Violet</h4>
-                                <div class="date">March 23, 2020</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="blog_grid_post shadow-sm wow fadeInUp" data-wow-delay="0.4s">
-                    <img src="img/blog-grid/blog_grid_post5.jpg" alt="">
-                    <div class="grid_post_content">
-                        <div class="post_tag">
-                            <a href="#">10 Min de lecture</a>
-                            <a class="cat-link cat-megento" href="#">Megento</a>
-                        </div>
-                        <a href="{{route('article')}}">
-                            <h4 class="b_title">Create A WordPress Multi Step Form With weForms</h4>
-                        </a>
-                        <p>The pressure to keep our skills sharp is constant. Mastering new skills may...</p>
-                        <div class="media post_author">
-                            <div class="round_img">
-                                <img src="img/blog-grid/author_5.jpg" alt="">
-                            </div>
-                            <div class="media-body author_text">
-                                <h4>Niles Peppertrout</h4>
-                                <div class="date">Oct 12, 2020</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="blog_grid_post shadow-sm wow fadeInUp" data-wow-delay="0.6s">
-                    <img src="img/blog-grid/blog_grid_post6.jpg" alt="">
-                    <div class="grid_post_content">
-                        <div class="post_tag">
-                            <a href="{{route('article')}}">14 Min de lecture</a>
-                            <a class="cat-laravel" href="#">Laravel</a>
-                        </div>
-                        <a href="#">
-                            <h4 class="b_title">The Grand Ecommerce Giveaway Worth</h4>
-                        </a>
-                        <p>The pressure to keep our skills sharp is constant. Mastering new skills may...</p>
-                        <div class="media post_author">
-                            <div class="round_img">
-                                <img src="img/blog-grid/author_6.jpg" alt="">
-                            </div>
-                            <div class="media-body author_text">
-                                <h4>Hanson Deck</h4>
-                                <div class="date">Sep 17, 2020</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @empty
+            <p>Aucun article ajouté pour le moment</p>
+            @endforelse
         </div>
     </div>
 </section>
@@ -310,7 +209,7 @@
         </div>
     </div>
 </section>
-<section class="doc_blog_grid_area_two">
+{{-- <section class="doc_blog_grid_area_two">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-6">
@@ -390,6 +289,6 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 @endsection

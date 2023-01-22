@@ -24,6 +24,7 @@ class ForumFactory extends Factory
             'likes' => $this->faker->numberBetween(1, 10),
             'dislikes' => $this->faker->numberBetween(1, 10),
             'slug' => $this->faker->uuid,
+            'tags' => $this->faker->words(3, true),
         ];
     }
 }

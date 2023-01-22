@@ -11,11 +11,19 @@ class AdminController extends Controller
 
     private $adminService;
 
-    public function __construct(AdminService $adminService) {
+    public function __construct(AdminService $adminService)
+    {
         $this->adminService = $adminService;
     }
 
-    public function store() {
+    public function index()
+    {
+        $admins = $this->adminService->getAllAdmins();
+        return view('pages.admin.pages.utilisateurs.administrateurs', compact('admins'));
+    }
+
+    public function store()
+    {
         $inputs = $this->adminService->validateStoreRequest();
         $this->adminService->createAdmin($inputs);
         // $credentials = [
@@ -23,7 +31,7 @@ class AdminController extends Controller
         //     'password' => $inputs['password']
         // ];
         $loginSuccess = $this->adminService->login($inputs);
-        if(! $loginSuccess) {
+        if (!$loginSuccess) {
             return back()->withInput()->withErrors([
                 'credentials' => 'Mot de passe et/ou email incorrect',
             ]);
@@ -31,11 +39,12 @@ class AdminController extends Controller
         return redirect()->route('admin.admin-create-page');
     }
 
-    public function login() {
+    public function login()
+    {
         $credentials = $this->adminService->validateLoginRequest();
         $loginSuccess = $this->adminService->login($credentials);
 
-        if(! $loginSuccess) {
+        if (!$loginSuccess) {
             return back()->withInput()->withErrors([
                 'credentials' => 'Mot de passe et/ou email incorrect',
             ]);
@@ -44,17 +53,17 @@ class AdminController extends Controller
         return redirect()->route('admin.home');
     }
 
-    public function show() {
-
+    public function show()
+    {
     }
 
-    public function update() {
-
+    public function update()
+    {
     }
 
-    public function logout() {
+    public function logout()
+    {
         $this->adminService->logout();
         return redirect()->route('admin.login');
     }
-
 }

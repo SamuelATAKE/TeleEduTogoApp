@@ -4,6 +4,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContributionsController;
 use App\Http\Controllers\ContributionsFilesController;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentaireArticleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\NiveauController;
@@ -32,11 +35,15 @@ Route::get('/inscription', function () {
         ->with("classes", Level::getGlobalClassesInfos())
         ->with("series", Level::getAllSeriesInfos());
 })->name('auth.user.register');
+
 Route::post('/user/store', [UserController::class, 'store'])->name('auth.user.store');
+
 Route::get('/connexion', function () {
     return view('auth.login');
 })->name('auth.user.login_page');
+
 Route::post('/user/login', [UserController::class, 'login'])->name('auth.user.login');
+
 Route::get('/deconnexion', [UserController::class, 'logout'])->name('auth.user.logout');
 // admin
 
@@ -51,6 +58,7 @@ Route::get('/404', function () {
 })->name('404');
 
 Route::get('/forums',[ForumController::class, 'index'])->name('forums');
+Route::post('/forums',[ForumController::class, 'store'])->name('forums.store')->middleware('auth');
 Route::get('/forums/{slug}',[ForumController::class, 'indexCatDetails'])->name('forums.catDetails');
 
 Route::get('/forum/{slug}',[ForumController::class, 'showForumDetails'])->name('forum');
@@ -59,17 +67,19 @@ Route::get('/forums-de-mon-niveau', function () {
     return view('pages.forums.level');
 })->name('forums.level');
 
-Route::get('/mes-forums', function () {
-    return view('pages.forums.self');
-})->name('forums.self');
+Route::get('/mes-forums',[ForumController::class,'personalForums'])->name('forums.self');
 
-Route::get('/blog', function () {
-    return view('pages.blog.index');
-})->name('blog');
+Route::get('/blog', [ArticleController::class, 'index'])->name('blog');
 
-Route::get('/article', function () {
-    return view('pages.blog.details');
-})->name('article');
+Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article');
+
+Route::post('/ajout-article', [ArticleController::class, 'store'])->name('article.store');
+
+Route::post('/ajout-commentaire', [CommentaireArticleController::class, 'store'])->name('article.commentaire.store');
+
+Route::get('/ajouter-article', function () {
+    return view('pages.blog.create');
+})->name('article.add');
 
 Route::get('/tableau-de-bord', function () {
     return view('pages.admin.pages.index');
@@ -89,17 +99,11 @@ Route::get('/profil', function () {
 })->name('profil.index');
 
 // Les utilisateurs
-Route::get('/administrateurs', function () {
-    return view('pages.admin.pages.utilisateurs.administrateurs');
-})->name('utilisateurs.administrateurs');
+Route::get('/administrateurs', [AdminController::class, 'index'])->name('utilisateurs.administrateurs');
 
-Route::get('/eleves', function () {
-    return view('pages.admin.pages.utilisateurs.eleves');
-})->name('utilisateurs.eleves');
+Route::get('/eleves', [UserController::class, 'allEleves'])->name('utilisateurs.eleves');
 
-Route::get('/etudiants', function () {
-    return view('pages.admin.pages.utilisateurs.etudiants');
-})->name('utilisateurs.etudiants');
+Route::get('/etudiants', [UserController::class, 'allEtudiants'])->name('utilisateurs.etudiants');
 
 Route::get('/classes', [NiveauController::class, 'index'])->name('niveaux.classes');
 

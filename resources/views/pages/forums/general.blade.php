@@ -1,5 +1,4 @@
 @extends('layouts.default')
-
 @section('content')
     <!--================Forum Breadcrumb Area =================-->
     <section class="doc_banner_area search-banner-light"
@@ -120,61 +119,82 @@
             <div class="modal" id="exampleModalCenter" role="dialog" aria-labelledby="exampleModalCenterTitle"
                 aria-hidden="true" data-backdrop="false" tabindex="-1">
                 <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Poser une question</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body forum-modal">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group forum-form-group">
-                                        <label for="example text">Titre de la question</label>
-                                        <input type="text" class="form-control" id="example text"
-                                            placeholder="Titre de la question" name="title">
-                                    </div>
-                                    <div class="form-group forum-form-group">
-                                        <label for="exampleFormControlTextarea1">Description de la
-                                            question</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                            placeholder="Description de la question" name="content"></textarea>
-                                    </div>
-                                    <div class="form-group forum-form-group">
-                                        <label for="exampleFormControlSelect1">Catégorie</label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="category">
-                                            @foreach ($forums as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group forum-form-group">
-                                        <label for="exampleFormControlSelect1">Niveau</label>
-                                        <select class="form-control" id="exampleFormControlSelect1">
-                                            <option>Primaire</option>
-                                            <option>Collège</option>
-                                            <option>Lycée</option>
-                                            <option>Université</option>
-                                        </select>
-                                    </div>
-                                    <!--custom file upload zone to drag and drop files-->
-                                    <div class="form-group forum-form-group">
-                                        <label for="exampleFormControlFile1">Joindre des fichiers</label>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile">
-                                            <label class="custom-file-label" for="customFile">Choisir un
-                                                fichier</label>
+                    <form action="{{ route('forums.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('POST')
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Poser une question</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body forum-modal">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group forum-form-group">
+                                            <label for="example text">Titre de la question</label>
+                                            <input type="text" class="form-control" id="example text"
+                                                placeholder="Titre de la question" name="title">
+                                            <!--validation error-->
+                                            @error('title')
+                                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group forum-form-group">
+                                            <label for="exampleFormControlTextarea1">Description de la
+                                                question</label>
+
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"></textarea>
+                                            <!--validation error-->
+                                            @error('content')
+                                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group forum-form-group">
+                                            <label for="exampleFormControlSelect1">Catégorie</label>
+                                            <select class="form-control" id="exampleFormControlSelect1" name="category">
+                                                @foreach ($forums as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('category')
+                                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group forum-form-group">
+                                            <label for="exampleFormControlSelect1">Niveau</label>
+                                            <select class="form-control" id="exampleFormControlSelect1">
+                                                <option>Primaire</option>
+                                                <option>Collège</option>
+                                                <option>Lycée</option>
+                                                <option>Université</option>
+                                            </select>
+                                        </div>
+                                        <!--custom file upload zone to drag and drop files-->
+                                        <div class="form-group forum-form-group d-none">
+                                            <label for="exampleFormControlFile1">Joindre des fichiers</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="customFile" multiple
+                                                    name="file" hidden>
+                                                <label class="custom-file-label" for="customFile">Choisir un
+                                                    fichier</label>
+                                            </div>
+                                            @error('file')
+                                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-secondary"
+                                    data-dismiss="modal">Fermer</button>
+                                <button type="submit" class="btn btn-sm btn-primary">Publier</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Fermer</button>
-                            <button type="button" class="btn btn-sm btn-primary">Publier</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             @if (count($forums) > 0)
@@ -226,7 +246,8 @@
                                                     <div class="freshness-name">
                                                         <a href="#" title="View Eh Jewel's profile"
                                                             class="bbp-author-link">
-                                                            <span class="bbp-author-name">{{ $category->last_forum_author ? $category->last_forum_author : 'Aucun post' }}</span>
+                                                            <span
+                                                                class="bbp-author-name">{{ $category->last_forum_author ? $category->last_forum_author : 'Aucun post' }}</span>
                                                         </a>
                                                     </div>
                                                     <span class="bbp-author-avatar">
@@ -267,4 +288,19 @@
         </div>
         <!-- /.container -->
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            tinymce.init({
+                selector: 'textarea', // change this value according to your HTML
+                plugins: ['a_tinymce_plugin', 'image', 'link'],
+                a_plugin_option: true,
+                a_configuration_option: 400,
+                images_file_types: 'jpg,svg,webp,png',
+                file_picker_types: 'file image media'
+            });
+        });
+    </script>
 @endsection

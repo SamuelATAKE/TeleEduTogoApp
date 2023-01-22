@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('category')->constrained('forum_categories');
             $table->integer('likes')->default(0);
             $table->integer('dislikes')->default(0);
+            $table->string('tags')->nullable();
             //$table->foreignId('level')->constrained('levels');
             $table->uuid('slug')->unique()->generatedAs('uuid_generate_v4()');
             $table->timestamps();

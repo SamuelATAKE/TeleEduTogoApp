@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Forum;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ForumService
 {
@@ -17,15 +18,16 @@ class ForumService
     {
          $res = DB::table('forum_categories')
             ->select('forum_categories.*', DB::raw('count(forums.id) as forums_count'),
+            DB::raw('max(forums.id) as last_forum_id'),
+            DB::raw('max(forums.created_at) as last_forum_created_at'),
             DB::raw('forums.title as last_forum_title'),
-            DB::raw('forums.created_at as last_forum_created_at'),
             DB::raw('users.lastname as last_forum_author'),
             DB::raw('count(comments.id) as comments_count'))
             ->leftJoin('forums', 'forums.category', '=', 'forum_categories.id')
             ->leftJoin('users', 'users.id', '=', 'forums.author')
             ->leftJoin('comments', 'comments.forum', '=', 'forums.id')
             ->groupBy('forum_categories.id')
-            ->orderBy('forum_categories.id', 'asc')
+            ->orderBy('last_forum_created_at', 'desc')
             ->paginate(10);
             //dd($res);
         return $res;
@@ -53,6 +55,19 @@ class ForumService
     {
         return \App\Models\Forum::with('category')->paginate(30);
     }
+    /**
+     * Get personnal forums with categories
+     *
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+
+     public function getPersonnalForumsWithCategories()
+     {
+         return \App\Models\Forum::with('category')
+             ->where('author', Auth::user()->id)
+             ->paginate(20);
+     }
 
     /**
      * Forum creation
@@ -61,24 +76,14 @@ class ForumService
      */
 
     public function createForum($request) {
+        //dd($request);
         $forum = Forum::create([
-            'title' => $request->title,
-            'content' => $request->content,
+            'title' => $request['title'],
+            'content' => $request['content'],
             'author' => Auth::user()->id,
-            'category' => $request->category,
-            'level' => 0
+            'category' => $request['category'],
+            'slug' => Str::uuid().'-'.Str::slug($request['title'], '-'),
         ]);
-
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $name = $image->getClientOriginalName();
-                $image->move(public_path() . '/images/', $name);
-                $data[] = $name;
-                $forum->forumImages()->create([
-                    'image' => $name
-                ]);
-            }
-        }
         return $forum;
     }
 

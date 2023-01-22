@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="{{ asset('css/style-main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+
+    @yield('styles')
+
     <title>TeleEduTogoApp</title>
 </head>
 
@@ -27,7 +31,9 @@
             <div class="round_spinner">
                 <div class="spinner"></div>
                 <div class="text">
+
                     <img src={{ asset('img/spinner_logo.png') }} alt="logo">
+
                     <h4><span>TeleEduTogo</span>App</h4>
                 </div>
             </div>
@@ -43,6 +49,7 @@
                         srcset="{{ asset('img/logo.png') }} 2x" alt="logo">
                     <img class="white_logo main_logo" style="width: 25%; height:25%" src="{{ asset('img/logo.png') }}"
                         srcset="{{ asset('img/logo.png') }} 2x" alt="logo">
+
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -297,7 +304,9 @@
                                 <a href="{{ route('auth.user.logout') }}" class="nav-link ">Déconnexion</a>
                             </li>
                             <div class="right-nav">
-                                <a class="nav_btn" href="#">{{Auth::guard('web')->user()->lastname}}</a>
+
+                               {{-- <a class="nav_btn" href="#">{{Auth::guard('web')->user()->lastname}}</a> --}}
+                                <a class="nav_btn" href="{{ route('profil.index') }}">{{Auth::guard('web')->user()->lastname}} {{Auth::guard('web')->user()->level->fullName}}</a>
                             </div>
                         @endauth
                     </ul>
@@ -401,8 +410,11 @@
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/xqabqz33jp8ly38i2o9pf8zc8hvr2bbm0oswzn6b2kn2e0a6/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>
+    @yield('scripts')
     @livewireScripts
-    @stack('js')
+
 </body>
 
 </html>

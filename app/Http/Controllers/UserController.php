@@ -12,13 +12,29 @@ class UserController extends Controller
 
     private $userService;
 
-    public function __construct(UserService $userService) {
+    public function __construct(UserService $userService)
+    {
         $this->userService = $userService;
     }
 
-    public function store() {
+    public function allEleves()
+    {
+        $users = $this->userService->getAllUsers();
+        // dd($users);
+        return view('pages.admin.pages.utilisateurs.eleves', compact('users'));
+    }
+
+    public function allEtudiants()
+    {
+        $users = $this->userService->getAllUsers();
+        return view('pages.admin.pages.utilisateurs.etudiants', compact('users'));
+    }
+
+
+    public function store()
+    {
         $inputs = $this->userService->validateStoreRequest();
-        if(! Level::isLevelInLevelTree($inputs["cycle"], $inputs["classe"], $inputs["serie"])) {
+        if (!Level::isLevelInLevelTree($inputs["cycle"], $inputs["classe"], $inputs["serie"])) {
             return back()->withInput()->withErrors([
                 'level' => 'Entrez des un niveau valide',
             ]);
@@ -30,18 +46,19 @@ class UserController extends Controller
             'password' => $inputs['password']
         ];
         $loginSuccess = $this->userService->login($credentials);
-        if(! $loginSuccess) {
+        if (!$loginSuccess) {
             return redirect()->route('auth.user.login_page');
         }
         // dd(Auth::guard('web')->user());
         return redirect()->route('welcome');
     }
 
-    public function login() {
+    public function login()
+    {
         $credentials = $this->userService->validateLoginRequest();
         $loginSuccess = $this->userService->login($credentials);
 
-        if(! $loginSuccess) {
+        if (!$loginSuccess) {
             return back()->withInput()->withErrors([
                 'credentials' => 'Mot de passe et/ou email incorrect',
             ]);
@@ -50,17 +67,17 @@ class UserController extends Controller
         return Redirect()->route('welcome');
     }
 
-    public function show() {
-
+    public function show()
+    {
     }
 
-    public function update() {
-
+    public function update()
+    {
     }
 
-    public function logout() {
+    public function logout()
+    {
         $this->userService->logout();
         return redirect()->route('welcome');
     }
-
 }

@@ -57,5 +57,10 @@ class AdminService {
         Request()->session()->regenerate();
         Request()->session()->regenerateToken();
     }
+
+    public function getAllAdmins() {
+        $admins = Admin::All();
+        return $admins;
+    }
 }
 
