@@ -402,6 +402,7 @@
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     @livewireScripts
+    @stack('js')
 </body>
 
 </html>

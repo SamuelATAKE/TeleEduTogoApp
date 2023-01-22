@@ -38,7 +38,7 @@
                                 <h4 class="mb-0">Choisir des images</h4>
                             </div>
                             <hr />
-                            <input id="fancy-file-upload" type="file" name="files[]"
+                            <input id="file-upload" type="file" name="files[]"
                                 accept=".pdf, .jpg, .png, image/jpeg, image/png" multiple>
                         </div>
                     </div>
@@ -78,4 +78,30 @@
             </form>
         </div>
     </section>
+    @once
+        @push('js')
+            <script src="{{ asset('assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+            <script src="{{ asset('assets/plugins/fancy-file-uploader/jquery.ui.widget.js') }}"></script>
+            <script src="{{ asset('assets/plugins/fancy-file-uploader/jquery.fileupload.js') }}"></script>
+            <script src="{{ asset('assets/plugins/fancy-file-uploader/jquery.iframe-transport.js') }}"></script>
+            <script src="{{ asset('assets/plugins/fancy-file-uploader/jquery.fancy-fileupload.js') }}"></script>
+            <script src="{{ asset('assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
+            <script src="{{ asset('assets/js/app.js') }}"></script>
+            <script>
+                $('#file-upload').FancyFileUpload({
+                    params: {
+                        action: 'fileuploader'
+                    },
+                    maxfilesize: 1000000
+                });
+            </script>
+            {{-- <script>
+            $(document).ready(function() {
+                $('#image-uploadify').imageuploadify();
+            });
+        </script> --}}
+        @endpush
+    @endonce
 @endsection

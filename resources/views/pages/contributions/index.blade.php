@@ -79,10 +79,9 @@
         </div>
         <div class="container">
             <div class="row blog_grid_tab">
-                @php $i=0 @endphp
                 @forelse ($contributions as $contribution)
                     <div class="col-lg-4 col-sm-6">
-                        <div class="blog_grid_post shadow-sm wow fadeInUp" data-wow-delay="{{ ($i % 3) * 0.5 }}s">
+                        <div class="blog_grid_post shadow-sm wow fadeInUp" data-wow-delay="{{ ($loop->index % 3) * 0.5 }}s">
                             <div class="grid_post_content">
                                 <a
                                     href="{{ route('contribution.{contributions}.show', ['contributions' => $contribution->routingKey()]) }}">
@@ -109,7 +108,6 @@
                             </div>
                         </div>
                     </div>
-                    @php $i++ @endphp
                     @empty
                     <h2>Il n'y a aucune contribution actuellement.
                     <a href="{{ route('contributions.create') }}" class="date btn btn-success text-light"><i class="lni lni-plus"></i>Ajouter une

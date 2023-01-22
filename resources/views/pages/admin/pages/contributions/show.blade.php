@@ -77,20 +77,14 @@
 
                                         <div class="list mt-0">
                                             <ul class="icons row">
-                                                @php
-                                                    $i = 1;
-                                                @endphp
                                                 @foreach ($contributions->contributionsFiles as $contributionFile)
                                                     <a href="{{ route('download.{contributionsFiles}.show', ['contributionsFiles' => $contributionFile->routingKey()]) }} "
                                                         target="_blank">
                                                         <li class="trigger Free">
                                                             <i class="lni lni-download"></i>
-                                                            <span>{{ $i }}.{{ $contributionFile->file_extension() }}</span>
+                                                            <span>{{ $loop->iteration }}.{{ $contributionFile->file_extension() }}</span>
                                                         </li>
                                                     </a>
-                                                    @php
-                                                        $i++;
-                                                    @endphp
                                                 @endforeach
                                             </ul>
                                         </div>
