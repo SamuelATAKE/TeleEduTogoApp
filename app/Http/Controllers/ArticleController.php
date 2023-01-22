@@ -23,10 +23,15 @@ class ArticleController extends Controller
     public function index()
     {
         //
-        $articles = $this->articleService->getAllArticles();
+        $articles = $this->articleService->getAllValideArticles();
         $l = $articles->count();
         $lastArticle = $articles[$l-1];
         return view('pages.blog.index', compact('articles', 'lastArticle'));
+    }
+
+    public function unvalidated() {
+        $articles = $this->articleService->getAllUnValideArticles();
+        return view('pages.admin.pages.blog.index', compact('articles'));
     }
 
     /**
@@ -65,7 +70,8 @@ class ArticleController extends Controller
         //         $input['illustration'] = '/storage/' . $cheminFichierIllustration;
         //     }
         // }
-        $input['illustration'] = $request->file('illustration')->store('blog_images');
+        $input['illustration'] = $request->file('illustration')->store('blog_images', 'public');
+        $input['validate'] = false;
         // dd($input);
 
         $newArticle = $this->articleService->addArticle($input);

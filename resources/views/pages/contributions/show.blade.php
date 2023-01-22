@@ -39,7 +39,7 @@
 
                     <!-- Forum post content -->
                     <div class="q-title">
-                        <span class="question-icon" title="Question">Titre </span>
+                        <span class="question-icon" title="Question">Titre: </span>
                         <h1>{{ $contributions->title }}</h1>
                     </div>
                     <div class="forum-post-content">
@@ -55,6 +55,7 @@
                                         <span>{{ $contributionFile->file_extension() }}</span>
                                     </span>
                                 </a>
+                                <small>Cliquer pour télécharger</small>
                             @endforeach
                             <small>
                                 <a
@@ -72,7 +73,7 @@
                             </div>
                         </div>
                         <div class="action-button-container action-btns">
-                            @livewire('like', ['contribution' => $contributions])
+                            {{-- @livewire('like', ['contribution' => $contributions]) --}}
                         </div>
                     </div>
                 </div>

@@ -81,14 +81,14 @@
                                                             Liste</a>
                                                         <a class="btn btn-block btn-danger radius-15 col-md-5 m-0 ml-2"
                                                             href="{{ route('admin.category.{category}.destroy', ['category' => $category->routingKey()]) }} ">
-                                                            Delete</a>
+                                                            Supprimer</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
                                 @empty
-                                    <h3>La listes des catégories est vides.</h3>
+                                    <p>La liste des catégories est vide.</p>
                                 @endforelse
                             </div>
                         </div>

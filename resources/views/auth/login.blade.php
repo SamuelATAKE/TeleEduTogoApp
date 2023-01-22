@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/SukuuShare.png') }}" type="image/x-icon">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <!-- icon css-->
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="assets/animation/animate.css">
     <link rel="stylesheet" href="css/style-main.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <title>TeleEduTogoApp | Authentification</title>
+    <title>SukuuShare | Authentification</title>
 </head>
 
 <body data-scroll-animation="true">
@@ -22,8 +22,9 @@
             <div class="round_spinner">
                 <div class="spinner"></div>
                 <div class="text">
-                    <img src="img/spinner_logo.png" alt="">
-                    <h4><span>TeleEduTogo</span>App</h4>
+                    <img src={{ asset('img/SukuuShare.png') }} alt="logo">
+
+                    <h4><span>SukuuShare</span></h4>
                 </div>
             </div>
             <h2 class="head">Pour rester toujours Smart...</h2>
@@ -43,7 +44,7 @@
                 <div class="sign_right signup_right">
                     <div class="sign_inner signup_inner">
                         <div class="text-center">
-                            <h3>Se connecter à TeleEduTogoApp</h3>
+                            <h3>Se connecter à SukuuShare</h3>
                             <p>Vous n'avez pas encore de compte? <a href="{{ route('auth.user.register') }}">Inscrivez-vous ici</a></p>
                             <a href="#" class="btn-google"><img src="img/signup/gmail.png" alt=""><span class="btn-text">Connectez-vous avec Gmail</span></a>
                         </div>

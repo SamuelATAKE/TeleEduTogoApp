@@ -35,7 +35,7 @@
                     <div class="card radius-15">
                         <div class="card-body">
                             <div class="card-title">
-                                <h4 class="mb-0">Choisir des images</h4>
+                                <h4 class="mb-0">Choisir des images ou fichiers PDF</h4>
                             </div>
                             <hr />
                             <input id="file-upload" type="file" name="files[]"
@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-lg-12 form-group">
                     <h6>description</h6>
-                    <textarea class="form-control message" name="content" id="content"></textarea>
+                    <textarea class="form-control message" name="content" id="content" placeholder="Une brève description de la ressource fournie ..."></textarea>
                     @error('content')
                         {{ $message }}
                     @enderror
@@ -79,7 +79,7 @@
         </div>
     </section>
     @once
-        @push('js')
+        @push('scripts')
             <script src="{{ asset('assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
             <script src="{{ asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
             <script src="{{ asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>

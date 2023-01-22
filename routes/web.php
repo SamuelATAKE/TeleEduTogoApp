@@ -79,11 +79,11 @@ Route::post('/ajout-commentaire', [CommentaireArticleController::class, 'store']
 
 Route::get('/ajouter-article', function () {
     return view('pages.blog.create');
-})->name('article.add');
+})->name('article.add')->middleware('auth');
 
 Route::get('/tableau-de-bord', function () {
     return view('pages.admin.pages.index');
-})->name('admin.index');
+})->name('admin.index')->middleware('App\Http\Middleware\Login');
 
 Route::get('/connexion-admin', function () {
     return view('pages.admin.auth.login');
@@ -96,65 +96,67 @@ Route::get('/retrouver-mon-mot-de-passe', function () {
 
 Route::get('/profil', function () {
     return view('pages.profil.index');
-})->name('profil.index');
+})->name('profil.index')->middleware('App\Http\Middleware\Login');
 
 // Les utilisateurs
-Route::get('/administrateurs', [AdminController::class, 'index'])->name('utilisateurs.administrateurs');
+Route::get('/administrateurs', [AdminController::class, 'index'])->name('utilisateurs.administrateurs')->middleware('App\Http\Middleware\Login');
 
-Route::get('/eleves', [UserController::class, 'allEleves'])->name('utilisateurs.eleves');
+Route::get('/eleves', [UserController::class, 'allEleves'])->name('utilisateurs.eleves')->middleware('App\Http\Middleware\Login');
 
-Route::get('/etudiants', [UserController::class, 'allEtudiants'])->name('utilisateurs.etudiants');
+Route::get('/etudiants', [UserController::class, 'allEtudiants'])->name('utilisateurs.etudiants')->middleware('App\Http\Middleware\Login');
 
-Route::get('/classes', [NiveauController::class, 'index'])->name('niveaux.classes');
+Route::get('/classes', [NiveauController::class, 'index'])->name('niveaux.classes')->middleware('App\Http\Middleware\Login');
+
+Route::get('/admin-blog', [ArticleController::class, 'unvalidated'])->name('admin.articles');
 
 Route::get('/ajouter-une-classe', function () {
     return view('pages.admin.pages.niveaux.create');
 })->name('niveaux.create');
 
-Route::post('/ajout-de-la-classe', [NiveauController::class, 'store'])->name('niveaux.store');
+Route::post('/ajout-de-la-classe', [NiveauController::class, 'store'])->name('niveaux.store')->middleware('App\Http\Middleware\Login');
 
 Route::get('/contributions/new', [ContributionsController::class, 'create'])
-    ->name('contributions.create');
+    ->name('contributions.create')->middleware('App\Http\Middleware\Login');
 Route::post('/contributions/post', [ContributionsController::class, 'store'])
-    ->name('contributions.post');
+    ->name('contributions.post')->middleware('App\Http\Middleware\Login');
 
 Route::get('/contributions', [ContributionsController::class, 'index'])
     ->name('contributions');
 
-Route::get('/{contributions}/show', [ContributionsController::class, 'show'])
+Route::get('contribution/{contributions}/show', [ContributionsController::class, 'show'])
     ->name('contribution.{contributions}.show');
 
 Route::get('/download/{contributions}/files', [ContributionsController::class, 'download'])
     ->name('download.{contributions}.files');
 
 Route::get('/download/{contributionsFiles}', [ContributionsFilesController::class, 'show'])
-    ->name('download.{contributionsFiles}.show');
+    ->name('download.{contributionsFiles}.show')->middleware('App\Http\Middleware\Login');
 
 /* Admin routes */
 
 Route::get('/admin/contributions', [ContributionsController::class, 'admin_index'])
-    ->name('admin.contributions.list');
+    ->name('admin.contributions.list')->middleware('App\Http\Middleware\Login');
 
 Route::get('/admin/contributions/non_validated', [ContributionsController::class, 'non_validated'])
-    ->name('admin.contribution.non_validated');
+    ->name('admin.contribution.non_validated')->middleware('App\Http\Middleware\Login');
 
 Route::get('/admin/{contributions}/show', [ContributionsController::class, 'admin_show'])
-    ->name('admin.contribution.{contributions}.show');
+    ->name('admin.contribution.{contributions}.show')->middleware('App\Http\Middleware\Login');
 
 Route::get('/admin/validate/{contributions}', [ContributionsController::class, 'validation'])
-    ->name('admin.contribution.{contributions}.validate');
+    ->name('admin.contribution.{contributions}.validate')->middleware('App\Http\Middleware\Login');
 
 Route::get('/admin/delete/{contributions}', [ContributionsController::class, 'destroy'])
-    ->name('admin.contribution.{contributions}.destroy');
+    ->name('admin.contribution.{contributions}.destroy')->middleware('App\Http\Middleware\Login');
 
 Route::get('/admin/category/new', [CategoryController::class, 'create'])
-    ->name('admin.category.create');
+    ->name('admin.category.create')->middleware('App\Http\Middleware\Login');
 
 Route::post('/admin/category/post', [CategoryController::class, 'store'])
-    ->name('admin.category.store');
+    ->name('admin.category.store')->middleware('App\Http\Middleware\Login')->middleware('App\Http\Middleware\Login');
 
 Route::get('/admin/category/{category}/destroy', [CategoryController::class, 'destroy'])
-    ->name('admin.category.{category}.destroy');
+    ->name('admin.category.{category}.destroy')->middleware('App\Http\Middleware\Login');
 
 Route::get('/admin/category/{category}/show', [CategoryController::class, 'show'])
-    ->name('admin.category.{category}.show');
+    ->name('admin.category.{category}.show')->middleware('App\Http\Middleware\Login');

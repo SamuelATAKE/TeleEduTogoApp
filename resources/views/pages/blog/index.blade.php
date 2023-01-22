@@ -84,7 +84,7 @@
         </div>
         <div class="row blog_top_post flex-row-reverse shadow">
             <div class="col-lg-7 p_top_img">
-                <img class="p_img" src="{{ $lastArticle->illustration }}" alt="">
+                <img class="p_img" src="{{ asset('storage/' .$lastArticle->illustration) }}" alt="">
             </div>
             <div class="col-lg-5 p-0">
                 <div class="b_top_post_content">
@@ -100,13 +100,14 @@
                         echo substr($lastArticle->contenu, 0, 30);
                         @endphp
                     </p>
-                    <a href="{{ route('article', $lastArticle->id) }}" class="learn_btn">Continuer par lire<i class="arrow_right"></i></a>
+                    <a href="{{ route('article', $lastArticle->id) }}" class="learn_btn">Continuer par lire<i
+                            class="arrow_right"></i></a>
                     <div class="media post_author">
                         <div class="round_img">
                             <img src="img/blog-grid/ansley.jpg" alt="">
                         </div>
                         <div class="media-body author_text">
-                            <h4>{{ $lastArticle->user->firstname}} {{ $lastArticle->user->firstname }}</h4>
+                            <h4>{{ $lastArticle->user->firstname}} {{ $lastArticle->user->lastname }}</h4>
                             <div class="date">{{ $lastArticle->created_at }}</div>
                         </div>
                     </div>
@@ -135,7 +136,7 @@
                     <a class="nav-link" href="#">Art</a>
                 </li>
                 <li class="nav-item cat-megento">
-                    <a class="nav-link" href="#">TeleEduTogoApp</a>
+                    <a class="nav-link" href="#">SukuuShare</a>
                 </li>
                 <li class="nav-item cat-startups">
                     <a class="nav-link" href="#">ENT-Togo</a>
@@ -148,7 +149,7 @@
             @forelse ($articles as $article)
             <div class="col-lg-4 col-sm-6">
                 <div class="blog_grid_post shadow-sm wow fadeInUp">
-                    <img src="{{ $article->illustration }}" alt="">
+                    <img style="max-width: 25em; max-height: 25em" src="{{ asset('storage/' .$article->illustration) }}" alt="">
                     <div class="grid_post_content">
                         <div class="post_tag">
                             <a href="#">18 Min de lecture</a>
@@ -165,10 +166,10 @@
                         </p>
                         <div class="media post_author">
                             <div class="round_img">
-                                <img src="{{ $article->illustration }}" alt="">
+                                <img src="img/blog-grid/ansley.jpg" alt="">
                             </div>
                             <div class="media-body author_text">
-                                <h4>{{ $article->user->firstname}} {{ $article->user->firstname }}</h4>
+                                <h4>{{ $article->user->firstname}} {{ $article->user->lastname }}</h4>
                                 <div class="date">{{ $article->created_at }}</div>
                             </div>
                         </div>
@@ -201,7 +202,7 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                         <label class="form-check-label" for="defaultCheck1">
-                            J'accepte les termes et conditions de TeleEduTogoApp
+                            J'accepte les termes et conditions de SukuuShare
                         </label>
                     </div>
                 </form>

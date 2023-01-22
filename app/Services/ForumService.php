@@ -3,9 +3,11 @@
 namespace App\Services;
 
 use App\Models\Forum;
+use App\Models\ForumCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Database\Query\Builder;
 
 class ForumService
 {
@@ -16,20 +18,18 @@ class ForumService
      */
     public function getCategoriesWithForums()
     {
-         $res = DB::table('forum_categories')
-            ->select('forum_categories.*', DB::raw('count(forums.id) as forums_count'),
-            DB::raw('max(forums.id) as last_forum_id'),
-            DB::raw('max(forums.created_at) as last_forum_created_at'),
-            DB::raw('forums.title as last_forum_title'),
-            DB::raw('users.lastname as last_forum_author'),
-            DB::raw('count(comments.id) as comments_count'))
-            ->leftJoin('forums', 'forums.category', '=', 'forum_categories.id')
-            ->leftJoin('users', 'users.id', '=', 'forums.author')
-            ->leftJoin('comments', 'comments.forum', '=', 'forums.id')
-            ->groupBy('forum_categories.id')
-            ->orderBy('last_forum_created_at', 'desc')
-            ->paginate(10);
-            //dd($res);
+        $res = ForumCategory::withCount('forums')->with(['forums' => function($query) {
+            $query->withCount('comments')->orderBy('created_at', 'desc');
+        }])->get();
+        $res->map(function($category) {
+            $category->last_forum_id = $category->forums->first()? $category->forums->first()->id : null;
+            $category->last_forum_created_at = $category->forums->first()? $category->forums->first()->created_at->format('Y-m-d H:i:s') : null;
+            $category->last_forum_title = $category->forums->first()? $category->forums->first()->title : null;
+            $category->last_forum_author = $category->forums->first()? $category->forums->first()->author()->first()->lastname : null;
+            $category->comments_count = $category->forums->sum('comments_count');
+            $category->forums_count = $category->forums->count();
+            unset($category->forums);
+        })->sortByDesc('last_forum_created_at');
         return $res;
 
     }

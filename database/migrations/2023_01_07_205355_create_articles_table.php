@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('illustration');
             $table->text('contenu');
             $table->string('slug')->nullable();
+            $table->boolean('validated');
 
             $table->foreignId('user_id')->constrained();
 

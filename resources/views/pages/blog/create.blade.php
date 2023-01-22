@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('styles')
+@section('scripts')
 {{--
 <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
 <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script> --}}
@@ -14,6 +14,7 @@
     });
 </script>
 @endsection
+
 
 @section('content')
 
@@ -108,7 +109,7 @@
                         <option value="sciences">Sciences</option>
                         <option value="litterature">Littérature</option>
                         <option value="info">Informatique et Technologie</option>
-                        <option value="app">TeleEduTogoApp</option>
+                        <option value="app">SukuuShare</option>
                         <option value="ent">ENT-Togo</option>
                     </select>
                     {{-- <label class="floating-label">Catégorie de l'article *</label> --}}
