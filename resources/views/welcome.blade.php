@@ -16,7 +16,7 @@
     </ul>
     <div class="container">
         <div class="doc_banner_content">
-            <h2 class="wow fadeInUp">TeleEduTogoApp</h2>
+            <h2 class="wow fadeInUp">SukuuShare</h2>
             <p class="wow fadeInUp" data-wow-delay="0.2s">Votre application vous aidant dans vos révisions!</p>
             <form action="#" class="header_search_form">
                 <div class="header_search_form_info">
@@ -208,7 +208,8 @@
             <div class="doc_round two" data-parallax='{"x": -10, "y": 70, "rotateY":0}'></div>
             <div class="doc_title text-center">
                 <h2 class="wow fadeInUp" data-wow-delay="0.2s">Cours et exercices</h2>
-                <p class="wow fadeInUp" data-wow-delay="0.4s">Retrouvez très prochainement des résumés de cours et exercices vous aidant dans les révisions<br></p>
+                <p class="wow fadeInUp" data-wow-delay="0.4s">Retrouvez très prochainement des résumés de cours et
+                    exercices vous aidant dans les révisions<br></p>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-6">
@@ -284,8 +285,9 @@
     <img class="shap_two" src="img/new/community_bg_shap_two.png" alt="">
     <div class="container">
         <div class="doc_title text-center">
-            <h2 class="wow fadeInUp" data-wow-delay="0.2s">Comment marche TeleEduTogoApp</h2>
-            <p class="wow fadeInUp" data-wow-delay="0.4s">TeleEduTogoApp te permet de réviser sans disposer de documents physiques
+            <h2 class="wow fadeInUp" data-wow-delay="0.2s">Comment marche SukuuShare</h2>
+            <p class="wow fadeInUp" data-wow-delay="0.4s">SukuuShare te permet de réviser sans disposer de documents
+                physiques
             </p>
         </div>
         <div class="doc_community_info">
@@ -338,7 +340,8 @@
                 </div>
             </div>
             <div class="text-center wow fadeInUp" data-wow-delay="0.4s">
-                <a href="#" class="question_text">Vous pouvez contribuer pour faire avancer le contenu de la plateforme </a>
+                <a href="#" class="question_text">Vous pouvez contribuer pour faire avancer le contenu de la plateforme
+                </a>
             </div>
         </div>
     </div>

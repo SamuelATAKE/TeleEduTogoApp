@@ -20,6 +20,18 @@ class ArticleService
         return $articles;
     }
 
+    public function getAllValideArticles()
+    {
+        $articles = Article::where('validated', true)->get();
+        return $articles;
+    }
+
+    public function getAllUnValideArticles()
+    {
+        $articles = Article::where('validated', false)->get();
+        return $articles;
+    }
+
     function validateStoreRequest()
     {
         $validatedInputs = Request()->validate([

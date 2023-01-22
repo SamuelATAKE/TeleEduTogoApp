@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="assets/animation/animate.css">
     <link rel="stylesheet" href="css/style-main.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <title>TeleEduTogoApp | Page d'Erreur</title>
+    <title>SukuuShare | Page d'Erreur</title>
     <link rel="stylesheet" href="scss/_button.scss">
 </head>
 
@@ -23,8 +23,9 @@
             <div class="round_spinner">
                 <div class="spinner"></div>
                 <div class="text">
-                    <img src="img/spinner_logo.png" alt="">
-                    <h4><span>TeleEduTogo</span>App</h4>
+                    <img src={{ asset('img/SukuuShare.png') }} alt="logo">
+
+                    <h4><span>SukuuShare</span></h4>
                 </div>
             </div>
             <h2 class="head">Pour rester toujours Smart...</h2>

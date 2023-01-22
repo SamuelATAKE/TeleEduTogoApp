@@ -7,7 +7,7 @@
         <div class="breadcrumb_content">
             <h1>{{ $article->titre }}</h1>
             <div class="single_post_author">
-                <img class="author_img" src="{{ asset($article->illustration) }}" alt="">
+                <img class="author_img" src="{{ asset('storage/'.$article->illustration) }}" alt="">
                 <div class="text">
                     <a href="#">
                         <h4>{{ $article->user->firstname }} {{ $article->user->lastname }}</h4>
@@ -28,8 +28,9 @@
             <div class="col-lg-8">
                 <div class="blog_single_info">
                     <div class="blog_single_item">
-                        <a href="#" class="blog_single_img"><img
-                                src="{{ asset('img/blog-single/single_post_img.jpg') }}" alt=""></a>
+                        <a href="#" class="blog_single_img">
+                            <img src="{{ asset('storage/'.$article->illustration) }}" alt="">
+                        </a>
                         {!! $article->contenu !!}
                         <div class="blog_social text-center">
                             <h5>Partager cet article</h5>
@@ -129,12 +130,15 @@
                     <div class="blog_comment_box topic_comment">
                         <h2 class="c_head">Laisser un commentaire</h2>
                         <p>Votre adresse mail ne sera pa publiée. Les champs réquis sont marqués *</p>
-                        <form class="get_quote_form row" action="{{ route('article.commentaire.store') }}" method="post">
+                        <form class="get_quote_form row" action="{{ route('article.commentaire.store') }}"
+                            method="post">
                             @csrf
                             @method('post')
                             {{-- <div class="col-md-6 form-group"> --}}
-                                <input type="hidden" class="form-control" name="article_id" id="article_id" value="{{ $article->id }}">
-                            {{-- </div> --}}
+                                <input type="hidden" class="form-control" name="article_id" id="article_id"
+                                    value="{{ $article->id }}">
+                                {{--
+                            </div> --}}
                             <div class="col-md-6 form-group">
                                 <input type="text" class="form-control" name="commentateur" id="name" required>
                                 <label class="floating-label">Nom complet *</label>

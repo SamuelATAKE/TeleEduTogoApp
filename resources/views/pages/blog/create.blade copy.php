@@ -108,7 +108,7 @@
                         <option value="sciences">Sciences</option>
                         <option value="litterature">Littérature</option>
                         <option value="info">Informatique et Technologie</option>
-                        <option value="app">TeleEduTogoApp</option>
+                        <option value="app">SukuuShare</option>
                         <option value="ent">ENT-Togo</option>
                     </select>
                     {{-- <label class="floating-label">Catégorie de l'article *</label> --}}

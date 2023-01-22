@@ -35,7 +35,7 @@
                     <div class="card radius-15">
                         <div class="card-body">
                             <div class="card-title">
-                                <h4 class="mb-0">Choisir des images</h4>
+                                <h4 class="mb-0">Choisir des images ou fichiers PDF</h4>
                             </div>
                             <hr />
                             <input id="fancy-file-upload" type="file" name="files[]"
@@ -67,8 +67,8 @@
                     @enderror
                 </div>
                 <div class="col-lg-12 form-group">
-                    <h6>description</h6>
-                    <textarea class="form-control message" name="content" id="content" placeholder="Enter Your Text ..."></textarea>
+                    <h6>Description</h6>
+                    <textarea class="form-control message" name="content" id="content" placeholder="Une brève description de la ressource fournie ..."></textarea>
                     @error('content')
                         {{ $message }}
                     @enderror
