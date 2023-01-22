@@ -111,6 +111,9 @@
                                         --}}
                                         <li><span>Inscrit le:</span><a href="#">{{Auth::guard('web')->user()->created_at}}</a></li>
                                     </ul>
+                                    <p>
+                                        <a href="{{ route('profil.update', ['id'=>Auth::guard('web')->user()->id]) }}">Mettre à jour les informations</a>
+                                    </p>
                                     <ul class="nav p_social">
                                         <li><a href="#"><i class="social_facebook"></i></a></li>
                                         <li><a href="#"><i class="social_twitter"></i></a></li>

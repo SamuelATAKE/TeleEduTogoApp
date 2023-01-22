@@ -7,13 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="{{ asset('img/SukuuShare.png') }}" type="image/x-icon">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css', Request::secure()) }}">
     <!-- icon css-->
-    <link rel="stylesheet" href="assets/elagent-icon/style.css">
-    <link rel="stylesheet" href="assets/animation/animate.css">
-    <link rel="stylesheet" href="css/style-main.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <title>SukuuShare | Authentification</title>
+    <link rel="stylesheet" href="{{ asset('assets/elagent-icon/style.css', Request::secure()) }}">
+    <link rel="stylesheet" href="{{ asset('assets/animation/animate.css', Request::secure()) }}">
+    <link rel="stylesheet" href="{{ asset('css/style-main.css', Request::secure()) }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css', Request::secure()) }}">
+    {{-- icon js --}}
+    <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+    <title>SukuuShare | Mise à jour d'informations</title>
 </head>
 
 <body data-scroll-animation="true">
@@ -36,17 +39,17 @@
             <div class="row ml-0 mr-0">
                 <div class="sign_left signup_left">
                     <h2>Un réseau social pour tous les élèves et étudiants du Togo</h2>
-                    <img class="position-absolute top" src="img/signup/top_ornamate.png" alt="top">
-                    <img class="position-absolute bottom" src="img/signup/bottom_ornamate.png" alt="bottom">
-                    <img class="position-absolute middle wow fadeInRight" src="img/signup/man_image.png" alt="bottom">
+                    <img class="position-absolute top" src="{{ asset('img/signup/top_ornamate.png', Request::secure()) }}" alt="top">
+                    <img class="position-absolute bottom" src="{{ asset('img/signup/bottom_ornamate.png', Request::secure()) }}" alt="bottom">
+                    <img class="position-absolute middle wow fadeInRight" src="{{ asset('img/signup/man_image.png', Request::secure()) }}" alt="bottom">
                     <div class="round wow zoomIn" data-wow-delay="0.2s"></div>
                 </div>
                 <div class="sign_right signup_right" style="height: 100%; overflow: scroll;">
                     <div class="sign_inner signup_inner">
                         <div class="text-center">
-                            <h3>Créer votre compte SukuuShare</h3>
+                            <h3>Mettez à jours vos informations</h3>
                             <p>Avez-vous déjà un compte? <a href="{{ route('auth.user.login_page') }}">Se connecter</a></p>
-                            <a href="#" class="btn-google"><img src="img/signup/gmail.png" alt=""><span class="btn-text">S'inscrire avec Google</span></a>
+                            <a href="#" class="btn-google"><img src="{{ asset('img/signup/gmail.png', Request::secure()) }}" alt=""><span class="btn-text">S'inscrire avec Google</span></a>
                         </div>
                         <div class="divider">
                             <span class="or-text">ou</span>
@@ -130,15 +133,15 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery-3.5.1.min.js"></script>
-    <script src="js/pre-loader.js"> </script>
-    <script src="assets/bootstrap/js/popper.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/parallaxie.js"></script>
-    <script src="js/TweenMax.min.js"></script>
-    <script src="assets/wow/wow.min.js"></script>
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{{ asset('js/jquery-3.5.1.min.js', Request::secure()) }}"></script>
+    <script src="{{ asset('js/pre-loader.js', Request::secure()) }}"> </script>
+    <script src="{{ asset('assets/bootstrap/js/popper.min.js', Request::secure()) }}"></script>
+    <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js', Request::secure()) }}"></script>
+    <script src="{{ asset('js/parallaxie.js', Request::secure()) }}"></script>
+    <script src="{{ asset('js/TweenMax.min.js', Request::secure()) }}"></script>
+    <script src="{{ asset('assets/wow/wow.min.js', Request::secure()) }}"></script>
+    {{-- <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script> --}}
+    <script src="{{ asset('js/main.js', Request::secure()) }}"></script>
 
 </body>
 
