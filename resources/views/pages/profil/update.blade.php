@@ -48,11 +48,6 @@
                     <div class="sign_inner signup_inner">
                         <div class="text-center">
                             <h3>Mettez à jours vos informations</h3>
-                            <p>Avez-vous déjà un compte? <a href="{{ route('auth.user.login_page') }}">Se connecter</a></p>
-                            <a href="#" class="btn-google"><img src="{{ asset('img/signup/gmail.png', Request::secure()) }}" alt=""><span class="btn-text">S'inscrire avec Google</span></a>
-                        </div>
-                        <div class="divider">
-                            <span class="or-text">ou</span>
                         </div>
                         <form action="{{ route('auth.user.store') }}" method="POST" class="row login_form">
                             {{ csrf_field() }}
@@ -60,12 +55,12 @@
                             {{-- Nom + Prenom --}}
                             <div class="col-sm-6 form-group">
                                 <label for="firstname" class="small_text">Prénom(s)</label>
-                                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Entrez votre prénom" value="{{old('firstname')}}">
+                                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Entrez votre prénom" value="{{$user->firstname}}">
                                 <p class="error">@error('firstname') {{$message}} @enderror</p>
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label for="lastname" class="small_text">Nom</label>
-                                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Entrez votre nom" value="{{old('lastname')}}">
+                                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Entrez votre nom" value="{{$user->lastname}}">
                                 <p class="error">@error('lastname') {{$message}} @enderror</p>
                             </div>
                             {{-- Niveau scolaire --}}
@@ -73,7 +68,9 @@
                                 <label for="cycle" class="small_text">Cycle Scolaire</label>
                                 <select class="form-control" name="cycle" id="cycle">
                                     @foreach ($cycles as $cycleCodeName => $infos)
-                                    <option value="{{$cycleCodeName}}">{{$infos["fullName"]}}</option>
+                                        <option value="{{$cycleCodeName}}" @if ($user->level->cycle == $cycleCodeName) selected @endif >
+                                            {{$infos["fullName"]}}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <p class="error">@error('cycle') {{$message}} @enderror</p>
@@ -83,7 +80,9 @@
                                 <label for="classe" class="small_text">Classe</label>
                                 <select class="form-control" name="classe" id="classe">
                                     @foreach ($classes as $classeCodeName => $infos)
-                                        <option value="{{$classeCodeName}}">{{$infos["fullName"]}}</option>
+                                        <option value="{{$classeCodeName}}" @if ($user->level->classe == $classeCodeName) selected @endif >
+                                            {{$infos["fullName"]}}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <p class="error">@error('level') {{$message}} @enderror</p>
@@ -93,7 +92,9 @@
                                 <select class="form-control" name="serie" id="serie">
                                     <option value=""></option>
                                     @foreach ($series as $serieCodeName => $infos)
-                                        <option value="{{$serieCodeName}}">{{$infos["fullName"]}}</option>
+                                        <option value="{{$serieCodeName}}" @if ($user->level->serie == $serieCodeName) selected @endif >
+                                            {{$infos["fullName"]}}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <p class="error">@error('level') {{$message}} @enderror</p>
@@ -101,7 +102,7 @@
                             {{-- Credentials --}}
                             <div class="col-lg-12 form-group">
                                 <label for="email" class="small_text">Votre adresse mail</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Entrez votre adresse mail" value="{{old('email')}}">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Entrez votre adresse mail" value="{{$user->email}}">
                                 <p class="error">@error('email') {{$message}} @enderror</p>
                             </div>
                             <div class="col-lg-12 form-group">

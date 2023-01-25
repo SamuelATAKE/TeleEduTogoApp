@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Level;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -79,7 +80,9 @@ class UserController extends Controller
     }
 
     public function updatePage() {
+        $user = User::find(Auth::guard('web')->user()->id);
         return view('pages.profil.update')
+            ->with("user", $user)
             ->with("cycles", Level::getAllCyclesInfos())
             ->with("classes", Level::getGlobalClassesInfos())
             ->with("series", Level::getAllSeriesInfos());
