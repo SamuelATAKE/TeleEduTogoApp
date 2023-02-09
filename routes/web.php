@@ -28,24 +28,20 @@ use Illuminate\Support\Facades\Route;
 /* AUTHENTIFICATION */
 
 // user
-Route::get('/inscription', function () {
-    // TODO : move to controller file
-    return view('auth.register')
-        ->with("cycles", Level::getAllCyclesInfos())
-        ->with("classes", Level::getGlobalClassesInfos())
-        ->with("series", Level::getAllSeriesInfos());
-})->name('auth.user.register');
+Route::middleware(['guest:web'])->group(function() {
+    Route::get('/inscription', [UserController::class, 'register'])->name('auth.user.register');
+    Route::get('/connexion', [UserController::class, 'loginPage'])->name('auth.user.login_page');
+    Route::post('/user/login', [UserController::class, 'login'])->name('auth.user.login');
+    Route::post('/user/store', [UserController::class, 'store'])->name('auth.user.store');
+});
 
-Route::post('/user/store', [UserController::class, 'store'])->name('auth.user.store');
 
-Route::get('/connexion', function () {
-    return view('auth.login');
-})->name('auth.user.login_page');
 
-Route::post('/user/login', [UserController::class, 'login'])->name('auth.user.login');
 
 Route::get('/deconnexion', [UserController::class, 'logout'])->name('auth.user.logout');
 // admin
+
+
 
 
 
@@ -94,9 +90,16 @@ Route::get('/retrouver-mon-mot-de-passe', function () {
     return view('auth.forgot-password');
 })->name('auth.recovery');
 
-Route::get('/profil', function () {
-    return view('pages.profil.index');
-})->name('profil.index')->middleware('App\Http\Middleware\Login');
+Route::middleware(['auth:web'])->group(function() {
+    Route::get('/profil', function () {
+        return view('pages.profil.index');
+    })->name('profil.index');
+    Route::get('/profil/modifier/{id}', [UserController::class, 'updatePage'])->name('profil.update');
+});
+
+// Route::get('/profil', function () {
+//     return view('pages.profil.index');
+// })->name('profil.index')->middleware('App\Http\Middleware\Login');
 
 // Les utilisateurs
 Route::get('/administrateurs', [AdminController::class, 'index'])->name('utilisateurs.administrateurs')->middleware('App\Http\Middleware\Login');
@@ -117,6 +120,7 @@ Route::post('/ajout-de-la-classe', [NiveauController::class, 'store'])->name('ni
 
 Route::get('/contributions/new', [ContributionsController::class, 'create'])
     ->name('contributions.create')->middleware('App\Http\Middleware\Login');
+
 Route::post('/contributions/post', [ContributionsController::class, 'store'])
     ->name('contributions.post')->middleware('App\Http\Middleware\Login');
 
