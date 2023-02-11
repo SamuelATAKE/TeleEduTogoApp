@@ -166,7 +166,7 @@ class ContributionsController extends Controller
         if ($fileName) {
 
             header("Content-type: application/zip");
-            header("Content-Disposition: attachment; filename=" . public_path($fileName));
+            header("Content-Disposition: attachment; filename=$contributions->title");
             header("Pragma: no-cache");
             header("Expires: 0");
             readfile(public_path($fileName));
