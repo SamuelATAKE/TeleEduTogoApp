@@ -69,9 +69,16 @@
                                         <p> {{ $contributions->content }} </p>
                                     </div>
                                     <div class="col-md-6 mt-2 row">
-                                        <p class="col-md-12">Liste des fichiers associés
+                                        <p class="col-md-12">
                                             <span>
-                                                <a href="{{route('download.{contributions}.files', ['contributions' => $contributions->routingKey()])}}">Tout télécharger</a>
+                                                @empty($contributions->contributionsFiles)
+                                                    Aucun fichier associé.
+                                                @else
+                                                    Liste des fichiers associés
+                                                    <a href="{{ route('download.{contributions}.files', ['contributions' => $contributions->routingKey()]) }}">
+                                                        Tout télécharger
+                                                    </a>
+                                                @endempty
                                             </span>
                                         </p>
 

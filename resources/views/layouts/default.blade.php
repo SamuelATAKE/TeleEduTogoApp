@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="{{ asset('img/SukuuShare.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/slick/slick.css') }}">
@@ -17,12 +17,12 @@
     <link rel="stylesheet" href="{{ asset('assets/mcustomscrollbar/jquery.mCustomScrollbar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style-main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/smart-wizard/css/smart_wizard_all.min.css') }}"> --}}
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
 
-    @yield('styles')
+    @stack('styles')
 
-    <title>SukuuShare</title>
+    <title>TeleEduTogoApp</title>
 </head>
 
 <body data-scroll-animation="true">
@@ -32,9 +32,9 @@
                 <div class="spinner"></div>
                 <div class="text">
 
-                    <img src={{ asset('img/SukuuShare.png') }} alt="logo">
+                    <img src={{ asset('img/spinner_logo.png') }} alt="logo">
 
-                    <h4><span>SukuuShare</span></h4>
+                    <h4><span>TeleEduTogo</span>App</h4>
                 </div>
             </div>
             <h2 class="head">Pour rester toujours Smart...</h2>
@@ -45,12 +45,10 @@
         <nav class="navbar navbar-expand-lg menu_one menu_purple sticky-nav">
             <div class="container">
                 <a class="navbar-brand header_logo" href="/">
-                    <img class="first_logo sticky_logo" style="width: 25%; height:25%"
-                        src="{{ asset('img/SukuuShareLogo.png') }}" srcset="{{ asset('img/SukuuShareLogo.png') }} 2x"
-                        alt="logo">
-                    <img class="white_logo main_logo" style="width: 25%; height:25%"
-                        src="{{ asset('img/SukuuShareLogo.png') }}" srcset="{{ asset('img/SukuuShareLogo.png') }} 2x"
-                        alt="logo">
+                    <img class="first_logo sticky_logo" style="width: 25%; height:25%" src="{{ asset('img/logo.png') }}"
+                        srcset="{{ asset('img/logo.png') }} 2x" alt="logo">
+                    <img class="white_logo main_logo" style="width: 25%; height:25%" src="{{ asset('img/logo.png') }}"
+                        srcset="{{ asset('img/logo.png') }} 2x" alt="logo">
 
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
@@ -106,18 +104,20 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="v-pills-layout-tab" data-toggle="pill"
-                                                        href="#v-pills-layout" role="tab" aria-controls="v-pills-layout"
-                                                        aria-selected="false">Lycée</a>
+                                                        href="#v-pills-layout" role="tab"
+                                                        aria-controls="v-pills-layout" aria-selected="false">Lycée</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="v-pills-tour-tab" data-toggle="pill"
-                                                        href="#v-pills-tour" role="tab" aria-controls="v-pills-tour"
+                                                        href="#v-pills-tour" role="tab"
+                                                        aria-controls="v-pills-tour"
                                                         aria-selected="false">Université</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="v-pills-content-tab" data-toggle="pill"
                                                         href="#v-pills-content" role="tab"
-                                                        aria-controls="v-pills-content" aria-selected="false">Autres</a>
+                                                        aria-controls="v-pills-content"
+                                                        aria-selected="false">Autres</a>
                                                 </li>
                                                 {{-- <li class="nav-item">
                                                     <a class="nav-link" id="v-pills-pages-tab" data-toggle="pill"
@@ -128,8 +128,8 @@
                                         </div>
                                         <div class="col-lg-7">
                                             <div class="tab-content tabContent" id="v-pills-tabContent">
-                                                <div class="tab-pane fade active show" id="v-pills-doc" role="tabpanel"
-                                                    aria-labelledby="v-pills-doc-tab">
+                                                <div class="tab-pane fade active show" id="v-pills-doc"
+                                                    role="tabpanel" aria-labelledby="v-pills-doc-tab">
                                                     <div class="d-flex">
                                                         <ul class="list-unstyled tab_list">
                                                             <li> <a href="doc-main.html"> CP</a> </li>
@@ -300,10 +300,10 @@
                             </ul> --}}
                         </li>
                         @auth('web')
-                        <li class="nav-item">
-                            <a href="{{ route('auth.user.logout') }}" class="nav-link ">Déconnexion</a>
-                        </li>
-                        <div class="right-nav">
+                            <li class="nav-item">
+                                <a href="{{ route('auth.user.logout') }}" class="nav-link ">Déconnexion</a>
+                            </li>
+                            <div class="right-nav">
 
                                {{-- <a class="nav_btn" href="#">{{Auth::guard('web')->user()->lastname}}</a> --}}
                                 <a class="nav_btn" href="{{ route('profil.index') }}">{{Auth::guard('web')->user()->lastname}} {{Auth::guard('web')->user()->level->fullName}}</a>
@@ -311,9 +311,9 @@
                         @endauth
                     </ul>
                     @guest('web')
-                    <div class="right-nav">
-                        <a class="nav_btn" href="{{ route('auth.user.login_page') }}">Connexion</a>
-                    </div>
+                        <div class="right-nav">
+                            <a class="nav_btn" href="{{ route('auth.user.login_page') }}">Connexion</a>
+                        </div>
                     @endguest
                 </div>
             </div>
@@ -329,9 +329,10 @@
                         <div class="col-lg-4 col-sm-6">
                             <div class="f_widget doc_about_widget wow fadeInUp" data-wow-delay="0.2s">
                                 <a href="#">
-                                    <img style="width: 50%; height: 50%" src="{{ asset('img/SukuuShareLogo.png') }}" alt="">
+                                    <img style="width: 50%; height: 50%" src="{{ asset('img/logo.png') }}"
+                                        alt="">
                                 </a>
-                                <p>SukuuShare, une puissante application pour l'éducation au Togo</p>
+                                <p>TeleEduTogoApp, une puissante application pour l'éducation au Togo</p>
                                 <ul class="list-unstyled">
                                     <li><a href="#"><i class="social_facebook"></i></a></li>
                                     <li><a href="#"><i class="social_twitter"></i></a></li>
@@ -410,10 +411,11 @@
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="https://cdn.tiny.cloud/1/xqabqz33jp8ly38i2o9pf8zc8hvr2bbm0oswzn6b2kn2e0a6/tinymce/6/tinymce.min.js"
-        referrerpolicy="origin"></script>
-    @yield('scripts')
+    referrerpolicy="origin"></script>
+    @stack('scripts')
     @livewireScripts
 
 </body>
 
+</html>
 </html>

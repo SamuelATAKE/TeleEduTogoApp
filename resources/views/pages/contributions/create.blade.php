@@ -1,11 +1,22 @@
 @extends('layouts.default')
 
 @section('content')
+    @once
+        @push('styles')
+            <link href="{{ asset('assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+            <link href="{{ asset('assets/plugins/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet" />
+            <link href="{{ asset('assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet" />
+            <link href="{{ asset('assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+            <link href="{{ asset('assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+            <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" />
+            <link href="{{ asset('assets/css/pace.min.css') }}" rel="stylesheet" />
+        @endpush
+    @endonce
     <!--================Contribution Breadcrumb Area =================-->
 
     <div class="breadcrumb_area_three">
-        <img class="p_absolute one" src="img/typography/leaf_left.png" alt="">
-        <img class="p_absolute four" src="img/typography/leaf_right.png" alt="">
+        {{-- <img class="p_absolute one" src="{{ asset('img/typography/leaf_left.png') }}" alt=""> --}}
+        <img class="p_absolute four" src="{{ asset('img/typography/leaf_right.png') }}" alt="">
         <div class="container">
             <div class="breadcrumb_text">
                 <h2>Hello! <span>Hello!</span></h2>
@@ -35,12 +46,20 @@
                     <div class="card radius-15">
                         <div class="card-body">
                             <div class="card-title">
+                                <h4 class="mb-0">Choisir des images</h4>
+                            </div>
+                            <hr />
+                            <input id="image-uploadify" type="file" name="files[]"
+                                accept=".jpg, .png, image/jpeg, image/png" multiple>
+                        </div>
+                        {{-- <div class="card-body">
+                            <div class="card-title">
                                 <h4 class="mb-0">Choisir des images ou fichiers PDF</h4>
                             </div>
                             <hr />
-                            <input id="file-upload" type="file" name="files[]"
-                                accept=".pdf, .jpg, .png, image/jpeg, image/png" multiple>
-                        </div>
+                            <input id="file-uploads" type="file" name="files[]"
+                                accept=".jpg, .png, image/jpeg, image/png" multiple>
+                        </div> --}}
                     </div>
                     @error('files')
                         {{ $message }}
@@ -67,7 +86,8 @@
                 </div>
                 <div class="col-lg-12 form-group">
                     <h6>description</h6>
-                    <textarea class="form-control message" name="content" id="content" placeholder="Une brève description de la ressource fournie ..."></textarea>
+                    <textarea class="form-control message" name="content" id="content"
+                        placeholder="Une brève description de la ressource fournie ..."></textarea>
                     @error('content')
                         {{ $message }}
                     @enderror
@@ -89,19 +109,20 @@
             <script src="{{ asset('assets/plugins/fancy-file-uploader/jquery.fancy-fileupload.js') }}"></script>
             <script src="{{ asset('assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
             <script src="{{ asset('assets/js/app.js') }}"></script>
-            <script>
+            {{-- <script>
                 $('#file-upload').FancyFileUpload({
                     params: {
                         action: 'fileuploader'
                     },
                     maxfilesize: 1000000
                 });
+            </script> --}}
+            <script>
+                $(document).ready(function() {
+                    $('#image-uploadify').imageuploadify();
+                });
             </script>
-            {{-- <script>
-            $(document).ready(function() {
-                $('#image-uploadify').imageuploadify();
-            });
-        </script> --}}
+            <script src="{{ asset('assets/js/app.js') }}"></script>
         @endpush
     @endonce
 @endsection

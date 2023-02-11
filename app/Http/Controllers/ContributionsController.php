@@ -164,8 +164,16 @@ class ContributionsController extends Controller
         $fileName = $this->contributionsService->full_download($contributions);
 
         if ($fileName) {
-            return response()->download(public_path($fileName));
+
+            header("Content-type: application/zip");
+            header("Content-Disposition: attachment; filename=" . public_path($fileName));
+            header("Pragma: no-cache");
+            header("Expires: 0");
+            readfile(public_path($fileName));
+            unlink(public_path($fileName));
+            // return response()->download(public_path($fileName));
+        } else {
+            abort(404);
         }
-        abort(404);
     }
 }
